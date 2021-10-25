@@ -1,8 +1,8 @@
 {
-  "name": "covid19india",
+  "name": "incovid19",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://www.covid19india.org/",
+  "homepage": "https://www.incovid19.org/",
   "dependencies": {
     "@primer/octicons-react": "^14.2.2",
     "@testing-library/jest-dom": "^5.14.1",
