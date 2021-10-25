@@ -2,7 +2,7 @@
   "name": "covid19india",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://www.covid19india.org/",
+  "homepage": "https://akshayks3.github.io/incovid19/incovid19-react",
   "dependencies": {
     "@primer/octicons-react": "^14.2.2",
     "@testing-library/jest-dom": "^5.14.1",
@@ -53,7 +53,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild": "yarn run compress_maps && cp build/index.html build/404.html && yarn run build:sw",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "postbuild": "yarn run compress_maps && copy build\\index.html build\\404.html && yarn run build:sw",
     "compress_maps": "rollup -c",
     "test": "react-scripts test --testPathIgnorePatterns=src/tests/ --passWithNoTests",
     "test:map": "react-scripts test src/tests/mapAndApiStateNames.test.js",

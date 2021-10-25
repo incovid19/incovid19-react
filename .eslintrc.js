@@ -16,10 +16,9 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', 'prettier', 'react-hooks', 'import'],
+  plugins: ['react', 'react-hooks', 'import'],
   rules: {
     'require-jsdoc': 0,
-    'prettier/prettier': 'error',
     'no-invalid-this': 0,
     'react/prop-types': 0,
     'react-hooks/rules-of-hooks': 'warn',
