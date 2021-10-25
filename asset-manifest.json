@@ -21,8 +21,8 @@
     "static/js/8.d1f14e59.chunk.js.map": "/incovid19-react/static/js/8.d1f14e59.chunk.js.map",
     "main.js": "/incovid19-react/static/js/main.9d85b594.chunk.js",
     "main.js.map": "/incovid19-react/static/js/main.9d85b594.chunk.js.map",
-    "runtime-main.js": "/incovid19-react/static/js/runtime-main.f99754c1.js",
-    "runtime-main.js.map": "/incovid19-react/static/js/runtime-main.f99754c1.js.map",
+    "runtime-main.js": "/incovid19-react/static/js/runtime-main.0c41abee.js",
+    "runtime-main.js.map": "/incovid19-react/static/js/runtime-main.0c41abee.js.map",
     "static/js/11.e8f5df8e.chunk.js": "/incovid19-react/static/js/11.e8f5df8e.chunk.js",
     "static/js/11.e8f5df8e.chunk.js.map": "/incovid19-react/static/js/11.e8f5df8e.chunk.js.map",
     "static/js/12.eeb21094.chunk.js": "/incovid19-react/static/js/12.eeb21094.chunk.js",
@@ -87,8 +87,8 @@
     "static/js/40.d4c900a1.chunk.js.map": "/incovid19-react/static/js/40.d4c900a1.chunk.js.map",
     "static/js/41.038faf9d.chunk.js": "/incovid19-react/static/js/41.038faf9d.chunk.js",
     "static/js/41.038faf9d.chunk.js.map": "/incovid19-react/static/js/41.038faf9d.chunk.js.map",
-    "static/js/42.cf58e115.chunk.js": "/incovid19-react/static/js/42.cf58e115.chunk.js",
-    "static/js/42.cf58e115.chunk.js.map": "/incovid19-react/static/js/42.cf58e115.chunk.js.map",
+    "static/js/42.e0e48fd7.chunk.js": "/incovid19-react/static/js/42.e0e48fd7.chunk.js",
+    "static/js/42.e0e48fd7.chunk.js.map": "/incovid19-react/static/js/42.e0e48fd7.chunk.js.map",
     "static/js/43.6de728b7.chunk.js": "/incovid19-react/static/js/43.6de728b7.chunk.js",
     "static/js/43.6de728b7.chunk.js.map": "/incovid19-react/static/js/43.6de728b7.chunk.js.map",
     "static/js/44.4ae87e73.chunk.js": "/incovid19-react/static/js/44.4ae87e73.chunk.js",
@@ -112,7 +112,7 @@
     "static/media/getFetch.cjs": "/incovid19-react/static/media/getFetch.582d29c4.cjs"
   },
   "entrypoints": [
-    "static/js/runtime-main.f99754c1.js",
+    "static/js/runtime-main.0c41abee.js",
     "static/js/11.e8f5df8e.chunk.js",
     "static/js/main.9d85b594.chunk.js"
   ]
