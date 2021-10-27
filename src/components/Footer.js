@@ -40,32 +40,32 @@ function Footer() {
           <Database />
         </a>
 
-        <a
+        {/* <a
           href="https://t.me/incovid19org"
           className="telegram"
           target="_blank"
           rel="noopener noreferrer"
         >
           <Send />
-        </a>
+        </a> */}
 
-        <a
+        {/* <a
           href="https://twitter.com/incovid19org"
           target="_blank"
           rel="noopener noreferrer"
           className="twitter"
         >
           <Twitter />
-        </a>
+        </a> */}
 
-        <a
+        {/* <a
           href="https://instagram.com/incovid19org"
           target="_blank"
           rel="noopener noreferrer"
           className="instagram"
         >
           <Instagram />
-        </a>
+        </a> */}
 
         <a
           href="mailto:hello@incovid19.org"
