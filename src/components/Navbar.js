@@ -59,7 +59,8 @@ function Navbar({pages, showLanguageSwitcher, setShowLanguageSwitcher}) {
 
       <div className="navbar-middle">
         <Link to="/" onClick={setExpand.bind(this, false)}>
-          InCovid19<span></span>
+          Continuing<div>Covid19</div>
+          <div>India</div>
         </Link>
       </div>
 
@@ -86,7 +87,7 @@ function Navbar({pages, showLanguageSwitcher, setShowLanguageSwitcher}) {
                 <Book {...activeNavIcon('/blog')} />
               </span>
             </Link> */}
-            <Link to="/volunteers">
+            <Link to="/collaborators">
               <span>
                 <Users {...activeNavIcon('/volunteers')} />
               </span>
