@@ -11,11 +11,11 @@ function Footer() {
     <footer>
       <div className="link">
         <a
-          href="https://github.com/covid19india"
+          href="https://github.com/incovid19"
           target="_blank"
           rel="noopener noreferrer"
         >
-          covid19india
+          incovid19
         </a>
       </div>
 
@@ -23,7 +23,7 @@ function Footer() {
 
       <div className="links">
         <a
-          href="https://github.com/covid19india/covid19india-react"
+          href="https://github.com/incovid19/incovid19-react"
           className="github"
           target="_blank"
           rel="noopener noreferrer"
@@ -41,7 +41,7 @@ function Footer() {
         </a>
 
         <a
-          href="https://t.me/covid19indiaorg"
+          href="https://t.me/incovid19org"
           className="telegram"
           target="_blank"
           rel="noopener noreferrer"
@@ -50,7 +50,7 @@ function Footer() {
         </a>
 
         <a
-          href="https://twitter.com/covid19indiaorg"
+          href="https://twitter.com/incovid19org"
           target="_blank"
           rel="noopener noreferrer"
           className="twitter"
@@ -59,7 +59,7 @@ function Footer() {
         </a>
 
         <a
-          href="https://instagram.com/covid19indiaorg"
+          href="https://instagram.com/incovid19org"
           target="_blank"
           rel="noopener noreferrer"
           className="instagram"
@@ -68,7 +68,7 @@ function Footer() {
         </a>
 
         <a
-          href="mailto:hello@covid19india.org"
+          href="mailto:hello@incovid19.org"
           className="mail"
           target="_blank"
           rel="noopener noreferrer"

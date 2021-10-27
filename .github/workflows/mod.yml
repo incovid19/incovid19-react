@@ -16,7 +16,7 @@ jobs:
           github-token: ${{secrets.jun_token}}
           script: |
             const { data } = await github.teams.getMembershipInOrg({
-              org: "covid19india",
+              org: "incovid19",
               team_slug: "mods",
               username: context.payload.sender.login,
             });

@@ -13,7 +13,7 @@ Always submit a PR against a "Claimed Issue" that's been assigned to you. If an 
 
 ![image](https://user-images.githubusercontent.com/27727946/120883947-e25bd900-c5fd-11eb-880e-423b8d20ee49.png)
 
-- People looking to contribute, filter issues by ["Status:Available"](https://github.com/covid19india/covid19india-react/issues?q=is%3Aissue+is%3Aopen+label%3A%22Status%3A+Available%22) and comment "/claim" on the issue they would like to be assigned to work on.
+- People looking to contribute, filter issues by ["Status:Available"](https://github.com/incovid-19/incovid19-react/issues?q=is%3Aissue+is%3Aopen+label%3A%22Status%3A+Available%22) and comment "/claim" on the issue they would like to be assigned to work on.
 
 ![image](https://user-images.githubusercontent.com/27727946/120884223-606caf80-c5ff-11eb-998a-a7f2790b9dd4.png)
 

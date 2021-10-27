@@ -16,7 +16,7 @@ function Banner(props) {
           )}{' '}
         </div>
         <a
-          href="https://blog.covid19india.org/2021/08/07/end"
+          href="https://blog.incovid19.org/2021/08/07/end"
           rel="noreferrer"
           target="_blank"
         >

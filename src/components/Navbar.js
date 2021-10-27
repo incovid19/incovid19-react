@@ -7,7 +7,7 @@ import {
 import locales from '../i18n/locales.json';
 
 import {useState, useCallback, useRef} from 'react';
-import {Book, HelpCircle, Home, Moon, Sun, Users} from 'react-feather';
+import {HelpCircle, Home, Moon, Sun, Users} from 'react-feather';
 import {useTranslation} from 'react-i18next';
 import {Link} from 'react-router-dom';
 import {useTransition, animated} from 'react-spring';
@@ -59,7 +59,7 @@ function Navbar({pages, showLanguageSwitcher, setShowLanguageSwitcher}) {
 
       <div className="navbar-middle">
         <Link to="/" onClick={setExpand.bind(this, false)}>
-          Covid19<span>India</span>
+          InCovid19<span></span>
         </Link>
       </div>
 
@@ -81,11 +81,11 @@ function Navbar({pages, showLanguageSwitcher, setShowLanguageSwitcher}) {
                 <Home {...activeNavIcon('/')} />
               </span>
             </Link>
-            <Link to="/blog">
+            {/* <Link to="/blog">
               <span>
                 <Book {...activeNavIcon('/blog')} />
               </span>
-            </Link>
+            </Link> */}
             <Link to="/volunteers">
               <span>
                 <Users {...activeNavIcon('/volunteers')} />
@@ -147,10 +147,10 @@ function Expand({pages, setExpand, darkMode, windowSize}) {
       })}
 
       {windowSize.width < 769 && <SunMoon {...{darkMode}} />}
-
+      {/* 
       <div className="expand-bottom">
         <h5>{t('A crowdsourced initiative.')}</h5>
-      </div>
+      </div> */}
     </div>
   );
 }

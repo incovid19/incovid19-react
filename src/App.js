@@ -30,7 +30,7 @@ const App = () => {
       pageLink: '/blog',
       view: Blog,
       displayName: 'Blog',
-      showInNavbar: true,
+      showInNavbar: false,
     },
     {
       pageLink: '/volunteers',
@@ -71,7 +71,7 @@ const App = () => {
 
       <Navbar {...{pages, showLanguageSwitcher, setShowLanguageSwitcher}} />
 
-      <Banner />
+      {/* <Banner /> */}
 
       <Suspense fallback={<div />}>
         <Switch location={location}>
