@@ -13,7 +13,7 @@ const State = lazy(() => retry(() => import('./components/State')));
 const LanguageSwitcher = lazy(() =>
   retry(() => import('./components/LanguageSwitcher'))
 );
-const Banner = lazy(() => retry(() => import('./components/Banner')));
+// const Banner = lazy(() => retry(() => import('./components/Banner')));
 
 const App = () => {
   const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
@@ -27,15 +27,9 @@ const App = () => {
       showInNavbar: true,
     },
     {
-      pageLink: '/blog',
-      view: Blog,
-      displayName: 'Blog',
-      showInNavbar: false,
-    },
-    {
-      pageLink: '/volunteers',
+      pageLink: '/collaborators',
       view: Volunteers,
-      displayName: 'Volunteers',
+      displayName: 'Collaborators',
       showInNavbar: true,
     },
     {
