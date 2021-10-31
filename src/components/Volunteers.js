@@ -1,7 +1,5 @@
 import Footer from './Footer';
 
-import {fetcher} from '../utils/commonFunctions';
-
 import {useTransition, animated} from '@react-spring/web';
 import classnames from 'classnames';
 import {memo, useMemo, useEffect, useState} from 'react';
@@ -14,12 +12,20 @@ import {
   Twitter,
 } from 'react-feather';
 import {Helmet} from 'react-helmet';
-import useSWR from 'swr';
 
-const VOLUNTEERS_DOMAIN = 'https://volunteers.covid19india.org';
-const PLACEHOLDER_IMG = 'placeholder.jpg';
+// const VOLUNTEERS_DOMAIN = 'https://volunteers.covid19india.org';
+// const PLACEHOLDER_IMG = 'placeholder.jpg';
 
-function Member({className, style, name, bio, link, image, socials = {}}) {
+function Member({
+  className,
+  style,
+  name,
+  bio,
+  link,
+  image,
+  image2,
+  socials = {},
+}) {
   const [loaded, setLoaded] = useState(false);
 
   const socialIcons = useMemo(
@@ -49,11 +55,20 @@ function Member({className, style, name, bio, link, image, socials = {}}) {
       )}
       <img
         className="image"
-        src={`${VOLUNTEERS_DOMAIN}/images/${image ? image : PLACEHOLDER_IMG}`}
+        src={`${image}`}
         alt={name}
         onLoad={setLoaded.bind(this, true)}
         style={{display: loaded ? 'block' : 'none'}}
       />
+      {image2 && (
+        <img
+          className="image"
+          src="https://raw.githubusercontent.com/akshayks3/images/main/cropped-Twitter-version-4-scaled-1-2048x2048.jpg"
+          alt={name}
+          onLoad={setLoaded.bind(this, true)}
+          style={{display: loaded ? 'block' : 'none'}}
+        />
+      )}
       <div className="details">
         <h2 className="name">{name}</h2>
         <p className="bio">{bio}</p>
@@ -85,25 +100,43 @@ function Member({className, style, name, bio, link, image, socials = {}}) {
 
 // TODO: Lazy-loading and content loader
 function Volunteers() {
-  const {data} = useSWR(`${VOLUNTEERS_DOMAIN}/data.json`, fetcher, {
-    suspense: true,
-    revalidateIfStale: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  });
-
-  const dataAugemented = useMemo(() => [...(data || []), {}], [data]);
-
+  const dataAugemented = [
+    {
+      bio: 'Indian Institute of Technology Madras',
+      image:
+        'https://raw.githubusercontent.com/akshayks3/images/main/1200px-IIT_Madras_Logo.svg.png',
+      name: 'V Kamakoti',
+    },
+    {
+      bio: 'Indian Institute of Science',
+      image:
+        'https://raw.githubusercontent.com/akshayks3/images/main/IISc_Master_Seal_Black.jpg',
+      image2:
+        'https://raw.githubusercontent.com/akshayks3/images/main/cropped-Twitter-version-4-scaled-1-2048x2048.jpg',
+      name: 'Rajesh Sundaresan',
+    },
+    {
+      bio: 'Indian Statistical Institute, Bangalore Centre',
+      image:
+        'https://raw.githubusercontent.com/akshayks3/images/main/1200px-Indianstatisticalinstitutelogo.svg.png',
+      name: 'Siva Athreya',
+    },
+    {
+      bio: 'Indian Statistical Institute, Delhi Centre',
+      image:
+        'https://raw.githubusercontent.com/akshayks3/images/main/1200px-Indianstatisticalinstitutelogo.svg.png',
+      name: 'Deepayan Sarkar',
+    },
+    {
+      bio: 'Semantic Web India',
+      image:
+        'https://raw.githubusercontent.com/akshayks3/images/main/semantic_logo-removebg-preview.png',
+      name: 'Asha Subramanian and team',
+    },
+  ];
+  console.log(dataAugemented);
   const transition = useTransition(dataAugemented, {
     keys: (item) => item?.name || 'last',
-    sort: (a, b) =>
-      Object.keys(a).length === 0
-        ? 1
-        : Object.keys(b).length === 0
-        ? -1
-        : Math.random() > 0.5
-        ? 1
-        : -1,
     delay: 200,
     trail: 200 / dataAugemented.length,
     from: {opacity: 0, scale: 0.8},
@@ -118,7 +151,7 @@ function Volunteers() {
   return (
     <>
       <Helmet>
-        <title>Volunteers - covid19india.org</title>
+        <title>Collaborators - incovid19.org</title>
         <meta
           name="title"
           content="Coronavirus Outbreak in India: Latest Map and Case Count"
@@ -128,12 +161,10 @@ function Volunteers() {
       <div className="Volunteers">
         <div className="wrapper">
           <div
-            className={classnames('description', 'fadeInUp')}
-            style={{animationDelay: '0.1s'}}
+            className={classnames('collaborators', 'fadeInUp')}
+            style={{animationDelay: '0.1s', fontSize: '2rem'}}
           >
-            We would like to thank the hundreds of volunteers who, for the last
-            18 months, extended their time and effort towards collating and
-            publishing COVID-19 data for India.
+            Collaborators
           </div>
         </div>
         <div className="members">
