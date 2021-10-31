@@ -1,11 +1,11 @@
 import {API_DOMAIN} from '../constants';
 
 import {memo} from 'react';
-import {Twitter, GitHub, Instagram, Database, Mail, Send} from 'react-feather';
-import {useTranslation} from 'react-i18next';
+import {GitHub, Database, Mail} from 'react-feather';
+// import {useTranslation} from 'react-i18next';
 
 function Footer() {
-  const {t} = useTranslation();
+  // const {t} = useTranslation();
 
   return (
     <footer>
@@ -19,11 +19,11 @@ function Footer() {
         </a>
       </div>
 
-      <h5>{t('We stand with everyone fighting on the frontlines')}</h5>
+      {/* <h5>{t('We stand with everyone fighting on the frontlines')}</h5> */}
 
       <div className="links">
         <a
-          href="https://github.com/incovid19/incovid19-react"
+          href="https://github.com/incovid19"
           className="github"
           target="_blank"
           rel="noopener noreferrer"
@@ -68,7 +68,7 @@ function Footer() {
         </a> */}
 
         <a
-          href="mailto:hello@incovid19.org"
+          href="mailto:contact@incovid19.org"
           className="mail"
           target="_blank"
           rel="noopener noreferrer"
