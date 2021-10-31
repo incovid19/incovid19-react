@@ -1,7 +1,7 @@
 import {UPDATES_COUNT} from '../constants';
 import {capitalize} from '../utils/commonFunctions';
 
-import {CrossReferenceIcon} from '@primer/octicons-react';
+// import {CrossReferenceIcon} from '@primer/octicons-react';
 import {format, formatDistance} from 'date-fns';
 import {Fragment, useLayoutEffect} from 'react';
 import {useTranslation} from 'react-i18next';
@@ -71,7 +71,7 @@ function Updates({updates}) {
             </Fragment>
           );
         })}
-      <div className="updates-footer">
+      {/* <div className="updates-footer">
         <a
           href="https://t.me/covid19indiaorg_updates"
           target="_blank"
@@ -83,7 +83,7 @@ function Updates({updates}) {
             <CrossReferenceIcon />
           </h4>
         </a>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -170,10 +170,10 @@ h6 {
 
   .navbar-middle {
     color: $gray;
-    font-size: 18px;
+    font-size: 10px;
     font-weight: 900;
     text-transform: uppercase;
-
+    text-align: center;
     span {
       color: $pblue;
     }
@@ -4020,12 +4020,21 @@ footer {
       text-align: justify;
       text-justify: inter-word;
     }
+    .collaborators {
+      border-radius: 0.25rem;
+      color: $blue;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 3rem;
+      text-align: justify;
+      text-justify: inter-word;
+    }
   }
 
   .members {
     display: grid;
     grid-auto-rows: 6.5rem;
-    grid-column-gap: 1%;
+    grid-column-gap: 10%;
     grid-row-gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     width: 80%;
@@ -4189,6 +4198,31 @@ footer {
   min-height: 30rem;
   width: 100%;
 
+  .wrapper {
+    max-width: 80%;
+
+    .description {
+      background: $blue-light;
+      border-radius: 0.25rem;
+      color: $blue;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 3rem;
+      padding: 1rem;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .collaborators {
+      border-radius: 0.25rem;
+      color: $blue;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 3rem;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+  }
+
   & > * {
     align-self: center;
     margin-bottom: 1.5rem;
@@ -4214,6 +4248,7 @@ footer {
   .answer {
     color: $blue;
     line-height: 1.5rem;
+    text-align: justify;
   }
 
   a {

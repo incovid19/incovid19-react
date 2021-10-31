@@ -1,5 +1,4 @@
 import './App.scss';
-import Blog from './components/Blog';
 import Navbar from './components/Navbar';
 import {retry} from './utils/commonFunctions';
 
