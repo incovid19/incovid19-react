@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  Here's our data <a href="https://api.incovid19.org">API</a>.
+  Here's our data <a href="https://data.incovid19.org">API</a>.
 </p>
 
 ## Setup
