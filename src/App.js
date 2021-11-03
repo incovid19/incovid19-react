@@ -4,7 +4,6 @@ import {retry} from './utils/commonFunctions';
 
 import {lazy, useState, Suspense, useEffect} from 'react';
 import {Route, Redirect, Switch, useLocation} from 'react-router-dom';
-
 const Home = lazy(() => retry(() => import('./components/Home')));
 const Volunteers = lazy(() => retry(() => import('./components/Volunteers')));
 const About = lazy(() => retry(() => import('./components/About')));
@@ -12,7 +11,7 @@ const State = lazy(() => retry(() => import('./components/State')));
 const LanguageSwitcher = lazy(() =>
   retry(() => import('./components/LanguageSwitcher'))
 );
-// const Banner = lazy(() => retry(() => import('./components/Banner')));
+const Banner = lazy(() => retry(() => import('./components/Banner')));
 
 const App = () => {
   const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
@@ -64,7 +63,7 @@ const App = () => {
 
       <Navbar {...{pages, showLanguageSwitcher, setShowLanguageSwitcher}} />
 
-      {/* <Banner /> */}
+      <Banner />
 
       <Suspense fallback={<div />}>
         <Switch location={location}>

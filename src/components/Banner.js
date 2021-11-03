@@ -1,4 +1,5 @@
-import {AlertIcon, ArrowRightIcon} from '@primer/octicons-react';
+// import {AlertIcon, ArrowRightIcon} from '@primer/octicons-react';
+import {AlertIcon} from '@primer/octicons-react';
 import {useTranslation} from 'react-i18next';
 
 function Banner(props) {
@@ -12,18 +13,32 @@ function Banner(props) {
         </div>
         <div className="content">
           {t(
-            'After keeping you updated with Covid-19 information for the last 18 months, we will be stopping our operations on 31st October, 2021.'
+            'Site under testing...We should stabilize in a few days. Please report issues at'
           )}{' '}
         </div>
         <a
-          href="https://blog.incovid19.org/2021/08/07/end"
+          href="https://github.com/incovid19/data/issues"
           rel="noreferrer"
           target="_blank"
         >
-          {t('Read the full blog post')}
-          <div className="arrow-right-icon">
-            <ArrowRightIcon size={16} />
-          </div>
+          &nbsp;Github
+        </a>
+        ,&nbsp;
+        <a
+          href="mailto: contact@incovid19.org"
+          rel="noreferrer"
+          target="_blank"
+        >
+          contact@incovid19.org
+        </a>
+        &nbsp;{t(' or ')}&nbsp;
+        {'  '}
+        <a
+          href="https://twitter.com/incovid19org"
+          rel="noreferrer"
+          target="_blank"
+        >
+          &nbsp; https://twitter.com/incovid19org
         </a>
       </div>
     </div>

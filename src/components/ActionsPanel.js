@@ -1,9 +1,11 @@
-import Tooltip from './Tooltip';
+// import Tooltip from './Tooltip';
 
 import {formatDate, retry} from '../utils/commonFunctions';
 
-import {BellIcon, BellSlashIcon, HistoryIcon} from '@primer/octicons-react';
-import {useMemo, useCallback, lazy, Suspense} from 'react';
+// import {BellIcon, BellSlashIcon, HistoryIcon} from '@primer/octicons-react';
+// import {BellIcon, BellSlashIcon} from '@primer/octicons-react';
+// import {useMemo, useCallback, lazy, Suspense} from 'react';
+import {useMemo, lazy, Suspense} from 'react';
 import {useTranslation} from 'react-i18next';
 
 const Timeline = lazy(() => retry(() => import('./Timeline')));
@@ -34,15 +36,15 @@ const ActionsPanel = ({
     return styles;
   }, []);
 
-  const handleTimelineClick = useCallback(() => {
-    setIsTimelineMode(true);
-    if (showUpdates) setShowUpdates(!showUpdates);
-  }, [setIsTimelineMode, setShowUpdates, showUpdates]);
+  // const handleTimelineClick = useCallback(() => {
+  //   setIsTimelineMode(true);
+  //   if (showUpdates) setShowUpdates(!showUpdates);
+  // }, [setIsTimelineMode, setShowUpdates, showUpdates]);
 
-  const handleBellClick = useCallback(() => {
-    if (!showUpdates) setNewUpdate(false);
-    setShowUpdates(!showUpdates);
-  }, [showUpdates, setShowUpdates, setNewUpdate]);
+  // const handleBellClick = useCallback(() => {
+  //   if (!showUpdates) setNewUpdate(false);
+  //   setShowUpdates(!showUpdates);
+  // }, [showUpdates, setShowUpdates, setNewUpdate]);
 
   return (
     <div className="ActionsPanel">
@@ -61,16 +63,16 @@ const ActionsPanel = ({
           'dd MMM, p'
         )} ${t('IST')}`}</h5>
 
-        <div
+        {/* <div
           className="bell-icon fadeInUp"
           style={trail[1]}
           onClick={handleBellClick}
         >
           {!showUpdates ? <BellIcon size={15} /> : <BellSlashIcon size={15} />}
           {newUpdate && <div className="indicator"></div>}
-        </div>
+        </div> */}
 
-        <Tooltip message={'Timeline'} hold>
+        {/* <Tooltip message={'Timeline'} hold>
           <div
             className="timeline-icon fadeInUp"
             onClick={handleTimelineClick}
@@ -78,7 +80,7 @@ const ActionsPanel = ({
           >
             {<HistoryIcon />}
           </div>
-        </Tooltip>
+        </Tooltip> */}
       </div>
 
       {isTimelineMode && (
