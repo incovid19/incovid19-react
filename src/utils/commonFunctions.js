@@ -53,6 +53,21 @@ export const getIndiaDateYesterdayISO = () => {
 };
 
 export const formatLastUpdated = (unformattedDate) => {
+  if (unformattedDate) {
+    if (typeof unformattedDate === 'string') {
+      unformattedDate.trim();
+      if (unformattedDate.indexOf(' ') != -1) {
+        unformattedDate = unformattedDate.replace(' ', 'T');
+        if (unformattedDate.indexOf('.') != -1) {
+          unformattedDate = unformattedDate.slice(
+            0,
+            unformattedDate.indexOf('.')
+          );
+          unformattedDate += '+05:30';
+        }
+      }
+    }
+  }
   getLocale();
   return formatDistance(new Date(unformattedDate), new Date(), {
     locale: locale,
@@ -63,17 +78,46 @@ export const parseIndiaDate = (unformattedDate) => {
   if (!unformattedDate) {
     return getIndiaDate();
   }
+  if (typeof unformattedDate === 'string') {
+    unformattedDate.trim();
+    if (unformattedDate.indexOf(' ') != -1) {
+      unformattedDate = unformattedDate.replace(' ', 'T');
+      if (unformattedDate.indexOf('.') != -1) {
+        unformattedDate = unformattedDate.slice(
+          0,
+          unformattedDate.indexOf('.')
+        );
+        unformattedDate += '+05:30';
+      }
+    }
+  }
+
   if (
     typeof unformattedDate === 'string' &&
     unformattedDate.match(ISO_DATE_REGEX)
   ) {
     unformattedDate += INDIA_ISO_SUFFIX;
   }
+
   return utcToZonedTime(new Date(unformattedDate), 'Asia/Kolkata');
 };
 
 export const formatDate = (unformattedDate, formatString) => {
+  console.log(unformattedDate);
   if (!unformattedDate) return '';
+  if (typeof unformattedDate === 'string') {
+    unformattedDate.trim();
+    if (unformattedDate.indexOf(' ') != -1) {
+      unformattedDate = unformattedDate.replace(' ', 'T');
+      if (unformattedDate.indexOf('.') != -1) {
+        unformattedDate = unformattedDate.slice(
+          0,
+          unformattedDate.indexOf('.')
+        );
+        unformattedDate += '+05:30';
+      }
+    }
+  }
   if (
     typeof unformattedDate === 'string' &&
     unformattedDate.match(ISO_DATE_REGEX)
