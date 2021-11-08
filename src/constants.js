@@ -46,23 +46,13 @@ export const STATISTIC_CONFIGS = {
     showDelta: true,
     hasPrimary: true,
   },
-  other: {
-    displayName: 'other',
-    format: 'long',
-    color: '#fd7e14',
-    showDelta: true,
-    tableConfig: {
-      notes: 'Migrated cases or non-COVID deaths',
-    },
-    hasPrimary: true,
-  },
-  tested: {
-    displayName: 'tested',
-    color: '#4b1eaa',
+  vaccinated: {
+    displayName: 'vaccine doses administered',
+    color: '#fb5581',
     format: 'short',
     showDelta: true,
     hideZero: true,
-    category: 'tested',
+    category: 'vaccinated',
   },
   vaccinated1: {
     displayName: 'vaccinated (at least one dose)',
@@ -80,13 +70,23 @@ export const STATISTIC_CONFIGS = {
     hideZero: true,
     category: 'vaccinated',
   },
-  vaccinated: {
-    displayName: 'vaccine doses administered',
-    color: '#fb5581',
+  other: {
+    displayName: 'other',
+    format: 'long',
+    color: '#fd7e14',
+    showDelta: true,
+    tableConfig: {
+      notes: 'Migrated cases or non-COVID deaths',
+    },
+    hasPrimary: true,
+  },
+  tested: {
+    displayName: 'tested',
+    color: '#4b1eaa',
     format: 'short',
     showDelta: true,
     hideZero: true,
-    category: 'vaccinated',
+    category: 'tested',
   },
   tpr: {
     displayName: 'test positivity ratio',
@@ -169,7 +169,12 @@ export const PRIMARY_STATISTICS = [
 
 export const LEVEL_STATISTICS = [...PRIMARY_STATISTICS];
 
-export const TABLE_STATISTICS = [...PRIMARY_STATISTICS, 'tested', 'vaccinated'];
+export const TABLE_STATISTICS = [
+  ...PRIMARY_STATISTICS,
+  'vaccinated',
+  'vaccinated1',
+  'vaccinated2',
+];
 
 export const TABLE_STATISTICS_EXPANDED = Object.keys(STATISTIC_CONFIGS).filter(
   (statistic) => !STATISTIC_CONFIGS[statistic]?.tableConfig?.hide
@@ -179,8 +184,8 @@ export const MAP_STATISTICS = [...PRIMARY_STATISTICS];
 
 export const TIMESERIES_STATISTICS = [
   ...PRIMARY_STATISTICS,
-  'tested',
   'vaccinated',
+  'tested',
   'tpr',
 ];
 
