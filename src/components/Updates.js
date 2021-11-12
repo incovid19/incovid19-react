@@ -36,7 +36,7 @@ function Updates({updates}) {
               <>
                 {index === 0 ? (
                   <div className="update">
-                    <h4>{t('No updates yet!')}</h4>
+                    <h4>{t('Updates awaited...')}</h4>
                   </div>
                 ) : (
                   ''

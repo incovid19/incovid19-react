@@ -2,6 +2,7 @@ import './App.scss';
 import Navbar from './components/Navbar';
 import {retry} from './utils/commonFunctions';
 
+import countapi from 'countapi-js';
 import {lazy, useState, Suspense, useEffect} from 'react';
 import {Route, Redirect, Switch, useLocation} from 'react-router-dom';
 const Home = lazy(() => retry(() => import('./components/Home')));
@@ -43,7 +44,18 @@ const App = () => {
       showInNavbar: false,
     },
   ];
+  // const [visits, getCount] = useState(0);
 
+  useEffect(() => {
+    countapi.visits('incovid19').then((result) => {
+      console.log(result.value);
+      // getCount(result.value);
+    });
+  }, []);
+
+  // getCount(
+
+  // );
   useEffect(() => {
     if (showLanguageSwitcher) {
       // For Chrome, Firefox, IE and Opera

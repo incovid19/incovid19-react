@@ -163,21 +163,6 @@ function Row({
     });
   }, []);
 
-  const checkForUpdate = (total, districts) => {
-    let count = 0;
-    Object.keys(districts).forEach((district) => {
-      console.log(district);
-      if (districts[district].total?.confirmed) {
-        count = count + districts[district].total?.confirmed;
-      }
-    });
-    if (count === total) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
   return (
     <>
       <div
@@ -245,17 +230,16 @@ function Row({
               )}
             </div>
 
-            {data.districts &&
-              checkForUpdate(data.total.confirmed, data.districts) && (
-                <div className="state-meta-bottom">
-                  <div className={classnames('disclaimer')}>
-                    <AlertIcon />
-                    <span>
-                      {t('District-wise data not updated in state bulletin')}
-                    </span>
-                  </div>
+            {data.districts && UNKNOWN_DISTRICT_KEY in data.districts && (
+              <div className="state-meta-bottom">
+                <div className={classnames('disclaimer')}>
+                  <AlertIcon />
+                  <span>
+                    {t('District-wise data not available in state bulletin')}
+                  </span>
                 </div>
-              )}
+              </div>
+            )}
           </div>
 
           <div className={classnames('row', 'heading')}>

@@ -3,7 +3,7 @@ import Tooltip from './Tooltip';
 import {formatDate, retry} from '../utils/commonFunctions';
 
 import {HistoryIcon} from '@primer/octicons-react';
-import {BellIcon, BellSlashIcon} from '@primer/octicons-react';
+// import {BellIcon, BellSlashIcon} from '@primer/octicons-react';
 import {useMemo, useCallback, lazy, Suspense} from 'react';
 import {useTranslation} from 'react-i18next';
 
@@ -40,10 +40,10 @@ const ActionsPanel = ({
     if (showUpdates) setShowUpdates(!showUpdates);
   }, [setIsTimelineMode, setShowUpdates, showUpdates]);
 
-  const handleBellClick = useCallback(() => {
-    if (!showUpdates) setNewUpdate(false);
-    setShowUpdates(!showUpdates);
-  }, [showUpdates, setShowUpdates, setNewUpdate]);
+  // const handleBellClick = useCallback(() => {
+  //   if (!showUpdates) setNewUpdate(false);
+  //   setShowUpdates(!showUpdates);
+  // }, [showUpdates, setShowUpdates, setNewUpdate]);
 
   return (
     <div className="ActionsPanel">
@@ -57,11 +57,10 @@ const ActionsPanel = ({
           pointerEvents: isTimelineMode ? 'none' : '',
         }}
       >
-        <h5 className="fadeInUp" style={trail[0]}>{`${formatDate(
-          lastUpdatedDate,
-          'dd MMM, p'
-        )} ${t('IST')}`}</h5>
-
+        <h5 className="fadeInUp" style={trail[0]}>
+          Updated on {`${formatDate(lastUpdatedDate, 'dd MMM, p')} ${t('IST')}`}
+        </h5>
+        {/* 
         <div
           className="bell-icon fadeInUp"
           style={trail[1]}
@@ -69,7 +68,7 @@ const ActionsPanel = ({
         >
           {!showUpdates ? <BellIcon size={15} /> : <BellSlashIcon size={15} />}
           {newUpdate && <div className="indicator"></div>}
-        </div>
+        </div> */}
 
         <Tooltip message={'Timeline'} hold>
           <div
@@ -81,6 +80,19 @@ const ActionsPanel = ({
           </div>
         </Tooltip>
       </div>
+      {!isTimelineMode && (
+        <div
+          className="actions"
+          style={{
+            marginTop: '10px',
+            marginLeft: '-10px',
+          }}
+        >
+          <h5 className="fadeInUp" style={trail[0]}>
+            Data as of {`${formatDate(dates[dates.length - 1], 'dd MMM yyyy')}`}
+          </h5>
+        </div>
+      )}
 
       {isTimelineMode && (
         <Suspense fallback={<div />}>

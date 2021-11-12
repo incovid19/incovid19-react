@@ -133,6 +133,12 @@ function Volunteers() {
         'https://raw.githubusercontent.com/akshayks3/images/main/semantic_logo-removebg-preview.png',
       name: 'Asha Subramanian and team',
     },
+    {
+      bio: 'Chennai Mathematical Institute, MSc. Data Science Program',
+      image:
+        'https://raw.githubusercontent.com/akshayks3/images/main/cmi-header.png',
+      name: 'Student Volunteers',
+    },
   ];
   console.log(dataAugemented);
   const transition = useTransition(dataAugemented, {

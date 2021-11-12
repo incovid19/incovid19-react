@@ -17,6 +17,7 @@ import useSWR from 'swr';
 const Updates = lazy(() => retry(() => import('./Updates')));
 
 const Actions = ({date, setDate, dates, lastUpdatedDate}) => {
+  console.log(date);
   const [showUpdates, setShowUpdates] = useState(false);
   const [newUpdate, setNewUpdate] = useLocalStorage('newUpdate', false);
   const [lastViewedLog, setLastViewedLog] = useLocalStorage('lastViewedLog', 0);
