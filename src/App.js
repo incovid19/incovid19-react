@@ -9,6 +9,7 @@ const Home = lazy(() => retry(() => import('./components/Home')));
 const Volunteers = lazy(() => retry(() => import('./components/Volunteers')));
 const About = lazy(() => retry(() => import('./components/About')));
 const State = lazy(() => retry(() => import('./components/State')));
+const Faq = lazy(() => retry(() => import('./components/Faq')));
 const LanguageSwitcher = lazy(() =>
   retry(() => import('./components/LanguageSwitcher'))
 );
@@ -35,6 +36,12 @@ const App = () => {
       pageLink: '/about',
       view: About,
       displayName: 'About',
+      showInNavbar: true,
+    },
+    {
+      pageLink: '/faq',
+      view: Faq,
+      displayName: 'FAQ',
       showInNavbar: true,
     },
     {

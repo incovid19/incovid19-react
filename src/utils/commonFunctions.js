@@ -221,7 +221,7 @@ export const getStatistic = (
   } else if (normalizedByPopulationPer === 'hundred') {
     multiplyFactor *= 1e2 / data?.meta?.population;
   }
-
+  console.log(statistic);
   let val;
   if (statistic === 'active' || statistic === 'activeRatio') {
     const confirmed = data?.[type]?.confirmed || 0;

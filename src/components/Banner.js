@@ -12,6 +12,13 @@ function Banner(props) {
           <AlertIcon size={16} />
         </div> */}
         <div className="content">
+          {t('Please check out our latest updates')}
+        </div>
+        <a href="https://incovid19.org/faq" rel="noreferrer" target="_blank">
+          here
+        </a>
+        .
+        <div className="content">
           {t('Please send suggestions and observations to')}{' '}
         </div>
         {/* <a

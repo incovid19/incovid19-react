@@ -80,7 +80,7 @@ const ActionsPanel = ({
           </div>
         </Tooltip>
       </div>
-      {!isTimelineMode && (
+      {/* {!isTimelineMode && (
         <div
           className="actions"
           style={{
@@ -92,7 +92,7 @@ const ActionsPanel = ({
             Data as of {`${formatDate(dates[dates.length - 1], 'dd MMM yyyy')}`}
           </h5>
         </div>
-      )}
+      )} */}
 
       {isTimelineMode && (
         <Suspense fallback={<div />}>
