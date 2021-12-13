@@ -1,11 +1,11 @@
 import Tooltip from './Tooltip';
 
-import {formatDate, retry} from '../utils/commonFunctions';
+import { formatDate, retry } from '../utils/commonFunctions';
 
-import {HistoryIcon} from '@primer/octicons-react';
-// import {BellIcon, BellSlashIcon} from '@primer/octicons-react';
-import {useMemo, useCallback, lazy, Suspense} from 'react';
-import {useTranslation} from 'react-i18next';
+import { HistoryIcon } from '@primer/octicons-react';
+import { BellIcon, BellSlashIcon } from '@primer/octicons-react';
+import { useMemo, useCallback, lazy, Suspense } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Timeline = lazy(() => retry(() => import('./Timeline')));
 
@@ -21,7 +21,7 @@ const ActionsPanel = ({
   setNewUpdate,
   setShowUpdates,
 }) => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const trail = useMemo(() => {
     const styles = [];
@@ -40,10 +40,10 @@ const ActionsPanel = ({
     if (showUpdates) setShowUpdates(!showUpdates);
   }, [setIsTimelineMode, setShowUpdates, showUpdates]);
 
-  // const handleBellClick = useCallback(() => {
-  //   if (!showUpdates) setNewUpdate(false);
-  //   setShowUpdates(!showUpdates);
-  // }, [showUpdates, setShowUpdates, setNewUpdate]);
+  const handleBellClick = useCallback(() => {
+    if (!showUpdates) setNewUpdate(false);
+    setShowUpdates(!showUpdates);
+  }, [showUpdates, setShowUpdates, setNewUpdate]);
 
   return (
     <div className="ActionsPanel">
@@ -51,16 +51,15 @@ const ActionsPanel = ({
         className="actions"
         style={{
           opacity: isTimelineMode ? 0 : 1,
-          transform: `perspective(600px) rotateX(${
-            isTimelineMode ? 90 : 0
-          }deg)`,
+          transform: `perspective(600px) rotateX(${isTimelineMode ? 90 : 0
+            }deg)`,
           pointerEvents: isTimelineMode ? 'none' : '',
         }}
       >
         <h5 className="fadeInUp" style={trail[0]}>
           Updated on {`${formatDate(lastUpdatedDate, 'dd MMM, p')} ${t('IST')}`}
         </h5>
-        {/* 
+
         <div
           className="bell-icon fadeInUp"
           style={trail[1]}
@@ -68,7 +67,7 @@ const ActionsPanel = ({
         >
           {!showUpdates ? <BellIcon size={15} /> : <BellSlashIcon size={15} />}
           {newUpdate && <div className="indicator"></div>}
-        </div> */}
+        </div>
 
         <Tooltip message={'Timeline'} hold>
           <div
@@ -97,7 +96,7 @@ const ActionsPanel = ({
       {isTimelineMode && (
         <Suspense fallback={<div />}>
           <Timeline
-            {...{date, setDate, dates, isTimelineMode, setIsTimelineMode}}
+            {...{ date, setDate, dates, isTimelineMode, setIsTimelineMode }}
           />
         </Suspense>
       )}

@@ -1,16 +1,17 @@
-import {UPDATES_COUNT} from '../constants';
-import {capitalize} from '../utils/commonFunctions';
+import { UPDATES_COUNT } from '../constants';
+// import {capitalize} from '../utils/commonFunctions';
 
 // import {CrossReferenceIcon} from '@primer/octicons-react';
-import {format, formatDistance} from 'date-fns';
-import {Fragment, useLayoutEffect} from 'react';
-import {useTranslation} from 'react-i18next';
+import { format } from 'date-fns';
+// import {format, formatDistance} from 'date-fns';
+import { Fragment, useLayoutEffect } from 'react';
+// import { useTranslation } from 'react-i18next';
 
 const newDate = new Date();
 let currentDate = newDate;
 
-function Updates({updates}) {
-  const {t} = useTranslation();
+function Updates({ updates }) {
+  // const { t } = useTranslation();
 
   useLayoutEffect(() => {
     currentDate = newDate;
@@ -36,7 +37,7 @@ function Updates({updates}) {
               <>
                 {index === 0 ? (
                   <div className="update">
-                    <h4>{t('Updates awaited...')}</h4>
+                    {/* <h4>{t('Updates awaited...')}</h4> */}
                   </div>
                 ) : (
                   ''
@@ -54,14 +55,14 @@ function Updates({updates}) {
                 ? addHeader()
                 : ' '}
               <div key={index} className="update">
-                <h5>
+                {/* <h5>
                   {capitalize(
                     formatDistance(
                       new Date(activity.timestamp * 1000),
                       new Date()
                     )
                   ) + ` ${t('ago')}`}
-                </h5>
+                </h5> */}
                 <h4
                   dangerouslySetInnerHTML={{
                     __html: activity.update,

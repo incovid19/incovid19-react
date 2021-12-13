@@ -1,25 +1,21 @@
 // import {AlertIcon, ArrowRightIcon} from '@primer/octicons-react';
 // import {AlertIcon} from '@primer/octicons-react';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 function Banner(props) {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   return (
-    <div className="Banner fadeInDown" style={{animationDelay: '0.4s'}}>
+    <div className="Banner fadeInDown" style={{ animationDelay: '0.4s' }}>
       <div className="wrapper">
         {/* <div className="alert-icon">
           <AlertIcon size={16} />
         </div> */}
         <div className="content">
-          {t('Please check out our latest updates')}
+          {t('Do checkout our latest graphs on vaccination coverage for each state.')}
         </div>
-        <a href="https://incovid19.org/faq" rel="noreferrer" target="_blank">
-          here
-        </a>
-        .
         <div className="content">
-          {t('Please send suggestions and observations to')}{' '}
+          {t('Please send suggestions and observations to')}{''}
         </div>
         {/* <a
           href="https://github.com/incovid19/data/issues"

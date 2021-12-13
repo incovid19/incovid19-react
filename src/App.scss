@@ -5664,3 +5664,63 @@ footer {
     transform: translate3d(0, 20px, 0);
   }
 }
+
+
+#scatterplot-stats {
+  max-width: 100%;
+  margin-top: 2rem;
+  padding: 0px 15px;
+
+    h1 {
+    color: $gray;
+    margin: 0;
+    text-align: center;
+  }
+
+  circle {
+  stroke: #3A3A3A;
+}
+}
+
+.axis {
+  fill: none;
+  stroke: #4B1EAA;
+  stroke-width: 2;
+}
+
+.axis text {
+  fill: #9E8AD2;
+  stroke: none;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+
+.cyclist circle:hover {
+  cursor: pointer;
+  z-index: 100000;
+}
+
+.tooltip {
+  position: absolute;
+  box-sizing: border-box;
+  background-color: rgba(74, 30, 170, 0.658);
+  color: #fff;
+  width:0;
+  height: 0;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: 300;
+  line-height: 1rem;
+  display: hide;
+}
+
+.graphtext{
+  font-size: 0.8rem;
+  box-sizing: border-box;
+  font-weight: 600;
+  position: relative;
+  top:30px;
+  margin-left:15px;
+  color: #4B1EAA;
+}

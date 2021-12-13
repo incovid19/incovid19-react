@@ -15,9 +15,9 @@ import {
   retry,
 } from '../utils/commonFunctions';
 
-import {SmileyIcon} from '@primer/octicons-react';
+import { SmileyIcon } from '@primer/octicons-react';
 import classnames from 'classnames';
-import {formatISO, max} from 'date-fns';
+import { formatISO, max } from 'date-fns';
 import {
   memo,
   useMemo,
@@ -27,10 +27,10 @@ import {
   Suspense,
   useRef,
 } from 'react';
-import {Helmet} from 'react-helmet';
-import {useTranslation} from 'react-i18next';
-import {useParams} from 'react-router-dom';
-import {useSessionStorage} from 'react-use';
+import { Helmet } from 'react-helmet';
+import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
+import { useSessionStorage } from 'react-use';
 import useSWR from 'swr';
 
 const DeltaBarGraph = lazy(() => retry(() => import('./DeltaBarGraph')));
@@ -49,7 +49,7 @@ const TimeseriesExplorer = lazy(() =>
 );
 
 function State() {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const stateCode = useParams().stateCode.toUpperCase();
 
@@ -64,17 +64,8 @@ function State() {
   });
   const [delta7Mode, setDelta7Mode] = useState(false);
 
-  useEffect(() => {
-    if (regionHighlighted.stateCode !== stateCode) {
-      setRegionHighlighted({
-        stateCode: stateCode,
-        districtName: null,
-      });
-      setShowAllDistricts(false);
-    }
-  }, [regionHighlighted.stateCode, stateCode]);
 
-  const {data: timeseries, error: timeseriesResponseError} = useSWR(
+  const { data: timeseries, error: timeseriesResponseError } = useSWR(
     `${DATA_API_ROOT}/timeseries-${stateCode}.min.json`,
     fetcher,
     {
@@ -83,12 +74,258 @@ function State() {
     }
   );
 
-  const {data} = useSWR(`${DATA_API_ROOT}/data.min.json`, fetcher, {
+  const { data } = useSWR(`${DATA_API_ROOT}/data.min.json`, fetcher, {
     revalidateOnMount: true,
     refreshInterval: 100000,
   });
 
   const stateData = data?.[stateCode];
+
+  const scatter = (json) => {
+
+    const margin = { top: 60, left: 35, bottom: 35, right: 50 }
+    const heightValue = 300;
+    const widthValue = 600;
+    const getCurrentDate = (lastUpdated, separator = ' ') => {
+      console.log('lastUpdate', lastUpdated)
+      const newDate = new Date(lastUpdated)
+
+      const month = newDate.toLocaleString('default', { month: 'long' });
+      const date = newDate.getDate();
+
+      return `${date < 10 ? `0${date}` : `${date}`}${separator}${month}`
+    }
+    console.log('json', json)
+    const currentdate = getCurrentDate(json[0]?.Date)
+    /* 
+    * The next block of code selects the id scatterplot-stats on the web page 
+    * and appends an svg object to it of the size 
+    * that we have set up with our width, height and margin’s.
+    */
+    d3.selectAll("#scatterplot-stats").selectAll("svg").remove()
+    d3.selectAll("#scatterplot-stats").selectAll("#date").remove()
+    d3.select("#scatterplot-stats").append("div").attr("id", "date").attr("class", 'graphtext').html(`${currentdate}`)
+    let svg = d3.select("#scatterplot-stats").append("svg")
+      .attr("viewBox", `0 0 ${widthValue} ${heightValue}`)
+
+
+    const strokeWidth = 1.5;
+
+    const width = widthValue - margin.left - margin.right - (strokeWidth * 2);
+    const height = heightValue - margin.top - margin.bottom;
+
+    const y = d3.scale.linear().range([height, 0]);
+    const x = d3.scale.linear().range([0, width]);
+
+
+    // let prefix = d3.formatPrefix(1.21e9);
+    const xAxis = d3.svg.axis().scale(x).ticks(6).tickFormat(function (d) {
+      const prefix = d3.formatPrefix(d);
+      return prefix.scale(d) + prefix.symbol;
+    }).orient("bottom")
+
+    const yAxis = d3.svg.axis().scale(y).orient("right").ticks(6).tickFormat(function (d) {
+      const prefix = d3.formatPrefix(d);
+      return prefix.scale(d) + prefix.symbol;
+    });
+
+
+    svg.append("rect")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("fill", "#E3E2F3")
+      .attr("rx", 4)
+      .attr("fill-opacity", 1);
+    // It also adds a g element that provides a reference point for adding our axes.  
+    svg = svg.append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+    const tooltip = d3.select("#scatterplot-stats").append("div")
+      .attr("class", "tooltip");
+
+    // function getColor(arg) {
+    //   return getRandomColor()
+    // }
+
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    /* 
+    * this function is like mouse over. 
+    * If we place the mouse over a circle the tooltip is going to show up.
+    */
+    function showToolTip(d, i) {
+      console.log('tooltip', d)
+      tooltip.style({
+        "display": "block",
+        "height": "80px",
+        "width": "200px",
+        "padding": "5px",
+        "opacity": 1,
+        "background-color": d.color
+      });
+
+      const tipsize = {
+        dx: parseInt(tooltip.style("width")),
+        dy: parseInt(tooltip.style("height"))
+      };
+
+      tooltip.style({
+        "top": (d3.event.pageY - tipsize.dy - 5) + "px",
+        "left": (d3.event.pageX - tipsize.dx + 100) + "px"
+      }).html("<span><b>" + d.Name + "<br/>" +
+        "Vaccine Dose 1: " + d.Vaccine1 + "% <br/>" +
+        "Vaccine Dose 2: " + d.Vaccine2 + "%<br/>" +
+        "Total Vaccinations: " + (d.count1 + d.count2))
+    }
+
+    /* 
+    * This function is like mouse out. 
+    * If we mouse out then the tooltip is hidding
+    */
+    function hideToolTip(d, i) {
+      console.log('tooltip', d)
+      tooltip.style({
+        "display": "none"
+      });
+    }
+
+
+    /* 
+    * d3.json takes the variable url and two more parameters
+    * if error, then throw it
+    * else map the time-date in the horizontal axis and the rank-position in the verticall axis
+    */
+    // d3.json(json, (error, data) => {
+    const data = json;
+    if (!data) {
+      throw new Error("d3.json error");
+    }
+    else {
+
+      x.domain([0, 100]);
+      y.domain([0, 100]);
+
+      svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+        .append("text")
+        .attr("fill", "red")
+        .attr("transform", "translate(" + width + ",-30)")
+        .attr("dy", "5.5em")
+        .attr("text-anchor", "end")
+        .text("Vaccine Dose 1 %");
+
+      svg.append("g")
+        .attr("class", "y axis")
+        .attr("transform", "translate(" + width + ", 0)")
+        .call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(0)")
+        .attr("dy", "-0.8em")
+        .attr("text-anchor", "end")
+        .text("Vaccine Dose 2 %");
+
+      const districts = svg.selectAll(".cyclist")
+        .data(data)
+        .enter().append("g")
+        .attr("class", "cyclist")
+        .attr("x", (d) => { return x(d.Vaccine1); })
+        .attr("y", (d) => { return y(d.Vaccine2); });
+
+      districts.append("circle")
+        .attr("cx", (d) => { return x(d.Vaccine1) })
+        .attr("cy", (d) => { return y(d.Vaccine2); })
+        .attr("r", 5)
+        .attr("fill", (d) => {
+          const color = getRandomColor();
+          d.color = color;
+          return color
+        })
+        .on("mouseover", showToolTip)
+        .on("mouseout", hideToolTip)
+
+    }
+
+  }
+
+
+  useEffect(() => {
+    if (regionHighlighted.stateCode !== stateCode) {
+      setRegionHighlighted({
+        stateCode: stateCode,
+        districtName: null,
+      });
+      setShowAllDistricts(false);
+    }
+    console.log('json', data)
+    if (data?.[stateCode]) {
+      console.log('state', data[stateCode].districts)
+      const details = [];
+      Object.keys(data[stateCode].districts).forEach((district) => {
+        if (data[stateCode].districts?.[district]?.total?.vaccinated1 && data[stateCode].districts?.[district]?.total?.vaccinated2 && data[stateCode].districts?.[district]?.meta?.population) {
+          const vaccine1 = ((data[stateCode].districts?.[district]?.total?.vaccinated1 / data[stateCode].districts?.[district]?.meta?.population) * 100).toFixed(2);
+          const vaccine2 = ((data[stateCode].districts?.[district]?.total?.vaccinated2 / data[stateCode].districts?.[district]?.meta?.population) * 100).toFixed(2);
+          if (vaccine1 && vaccine2 && vaccine1 <= 100 && vaccine2 <= 100) {
+            details.push({
+              "Vaccine1": vaccine1 ?? 0,
+              "Vaccine2": vaccine2 ?? 0,
+              "count1": data[stateCode].districts?.[district]?.total?.vaccinated1,
+              "count2": data[stateCode].districts?.[district]?.total?.vaccinated2,
+              "Name": district,
+              "Date": data[stateCode]?.meta?.date ?? ''
+            })
+          }
+        }
+      })
+      scatter(details)
+    }
+
+    // scatter([
+    //     {
+    // "Time": 300000,
+    // "Place": 10000,
+    // "Seconds": 2210,
+    // "Name": "Marco Pantani",
+    // "Year": 1995,
+    // "Nationality": "ITA",
+    // "Doping": "Alleged drug use during 1995 due to high hematocrit levels",
+    // "URL": "https://en.wikipedia.org/wiki/Marco_Pantani#Alleged_drug_use"
+    //   },
+    //           {
+    // "Time": 3504,
+    // "Place": 3300,
+    // "Seconds": 2210,
+    // "Name": "Marco Pantani",
+    // "Year": 1995,
+    // "Nationality": "ITA",
+    // "Doping": "Alleged drug use during 1995 due to high hematocrit levels",
+    // "URL": "https://en.wikipedia.org/wiki/Marco_Pantani#Alleged_drug_use"
+    //   },
+    // {
+    // "Time": 55,
+    // "Place": 100,
+    // "Seconds": 2210,
+    // "Name": "Marco Pantani",
+    // "Year": 1995,
+    // "Nationality": "ITA",
+    // "Doping": "Alleged drug use during 1995 due to high hematocrit levels",
+    // "URL": "https://en.wikipedia.org/wiki/Marco_Pantani#Alleged_drug_use"
+    // },
+    //   ]);
+
+  }, [regionHighlighted.stateCode, stateCode, stateData, data]);
+
 
   const toggleShowAllDistricts = () => {
     setShowAllDistricts(!showAllDistricts);
@@ -108,8 +345,8 @@ function State() {
     const gridColumnCount = window.innerWidth >= 540 ? 3 : 2;
     const districtCount = stateData?.districts
       ? Object.keys(stateData.districts).filter(
-          (districtName) => districtName !== 'Unknown'
-        ).length
+        (districtName) => districtName !== 'Unknown'
+      ).length
       : 0;
     const gridRowCount = Math.ceil(districtCount / gridColumnCount);
     return gridRowCount;
@@ -140,8 +377,8 @@ function State() {
     ].filter((date) => date);
     return updatedDates.length > 0
       ? formatISO(max(updatedDates.map((date) => parseIndiaDate(date))), {
-          representation: 'date',
-        })
+        representation: 'date',
+      })
       : null;
   }, [stateData]);
 
@@ -176,8 +413,9 @@ function State() {
   const districts = Object.keys(
     ((!noDistrictData || !statisticConfig.hasPrimary) &&
       stateData?.districts) ||
-      {}
+    {}
   );
+
 
   return (
     <>
@@ -195,12 +433,12 @@ function State() {
         <div className="state-left">
           <StateHeader data={stateData} stateCode={stateCode} />
 
-          <div style={{position: 'relative'}}>
-            <MapSwitcher {...{mapStatistic, setMapStatistic}} />
+          <div style={{ position: 'relative' }}>
+            <MapSwitcher {...{ mapStatistic, setMapStatistic }} />
             <Level data={stateData} />
             <Minigraphs
               timeseries={timeseries?.[stateCode]?.dates}
-              {...{stateCode}}
+              {...{ stateCode }}
               forceRender={!!timeseriesResponseError}
             />
           </div>
@@ -210,7 +448,7 @@ function State() {
           )}
 
           {data && (
-            <Suspense fallback={<div style={{minHeight: '50rem'}} />}>
+            <Suspense fallback={<div style={{ minHeight: '50rem' }} />}>
               <MapExplorer
                 {...{
                   stateCode,
@@ -260,15 +498,14 @@ function State() {
                     {t('Top districts')}
                   </h2>
                   <div
-                    className={`districts fadeInUp ${
-                      showAllDistricts ? 'is-grid' : ''
-                    }`}
+                    className={`districts fadeInUp ${showAllDistricts ? 'is-grid' : ''
+                      }`}
                     style={
                       showAllDistricts
                         ? {
-                            gridTemplateRows: `repeat(${gridRowCount}, 2rem)`,
-                            ...trail[1],
-                          }
+                          gridTemplateRows: `repeat(${gridRowCount}, 2rem)`,
+                          ...trail[1],
+                        }
                         : trail[1]
                     }
                   >
@@ -321,24 +558,23 @@ function State() {
                                 primaryStatistic
                               ) === 0
                           ) && (
-                          <div
-                            className={`alert ${
-                              primaryStatistic === 'confirmed' ? 'is-green' : ''
-                            }`}
-                          >
-                            <SmileyIcon />
-                            <div className="alert-right">
-                              No new {primaryStatistic} cases in the past five
-                              days
+                            <div
+                              className={`alert ${primaryStatistic === 'confirmed' ? 'is-green' : ''
+                                }`}
+                            >
+                              <SmileyIcon />
+                              <div className="alert-right">
+                                No new {primaryStatistic} cases in the past five
+                                days
+                              </div>
                             </div>
-                          </div>
-                        )}
+                          )}
                       </div>
                     )}
                   <DeltaBarGraph
                     timeseries={timeseries?.[stateCode]?.dates}
                     statistic={primaryStatistic}
-                    {...{stateCode, lookback}}
+                    {...{ stateCode, lookback }}
                     forceRender={!!timeseriesResponseError}
                   />
                 </div>
@@ -356,7 +592,7 @@ function State() {
                     </span>
                   </button>
                 ) : (
-                  <div style={{height: '3.75rem', flexBasis: '15%'}} />
+                  <div style={{ height: '3.75rem', flexBasis: '15%' }} />
                 )}
               </div>
             </div>
@@ -372,11 +608,19 @@ function State() {
                 }}
                 forceRender={!!timeseriesResponseError}
               />
+              <div id="scatterplot-stats">
+                <h1 lassName="text-center ">{t('Vaccination Coverage')}</h1>
+              </div>
             </Suspense>
           </>
         </div>
       </div>
+      {/* <div className="chartflex">
+        <div className="flex1">&nbsp;</div> */}
+      <div >
 
+      </div>
+      {/* </div> */}
       <Footer />
     </>
   );
