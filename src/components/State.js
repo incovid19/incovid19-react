@@ -82,8 +82,8 @@ function State() {
   const stateData = data?.[stateCode];
 
   const scatter = (json) => {
-
-    const margin = { top: 60, left: 35, bottom: 35, right: 50 }
+    console.log(json)
+    const margin = { top: 60, left: 35, bottom: 40, right: 50 }
     const heightValue = 300;
     const widthValue = 600;
     const getCurrentDate = (lastUpdated, separator = ' ') => {
@@ -222,7 +222,7 @@ function State() {
         .append("text")
         .attr("fill", "red")
         .attr("transform", "translate(" + width + ",-30)")
-        .attr("dy", "5.5em")
+        .attr("dy", "4.5em")
         .attr("text-anchor", "end")
         .text("Vaccine Dose 1 %");
 
@@ -272,22 +272,51 @@ function State() {
     if (data?.[stateCode]) {
       console.log('state', data[stateCode].districts)
       const details = [];
-      Object.keys(data[stateCode].districts).forEach((district) => {
-        if (data[stateCode].districts?.[district]?.total?.vaccinated1 && data[stateCode].districts?.[district]?.total?.vaccinated2 && data[stateCode].districts?.[district]?.meta?.population) {
-          const vaccine1 = ((data[stateCode].districts?.[district]?.total?.vaccinated1 / data[stateCode].districts?.[district]?.meta?.population) * 100).toFixed(2);
-          const vaccine2 = ((data[stateCode].districts?.[district]?.total?.vaccinated2 / data[stateCode].districts?.[district]?.meta?.population) * 100).toFixed(2);
-          if (vaccine1 && vaccine2 && vaccine1 <= 100 && vaccine2 <= 100) {
-            details.push({
-              "Vaccine1": vaccine1 ?? 0,
-              "Vaccine2": vaccine2 ?? 0,
-              "count1": data[stateCode].districts?.[district]?.total?.vaccinated1,
-              "count2": data[stateCode].districts?.[district]?.total?.vaccinated2,
-              "Name": district,
-              "Date": data[stateCode]?.meta?.date ?? ''
-            })
+      const noPopulation = ['DL', 'LA']
+      if (noPopulation.includes(stateCode)) {
+        const obj = {};
+        if (data[stateCode]?.meta?.population && data[stateCode]?.total?.vaccinated1 && data[stateCode]?.total?.vaccinated2) {
+          obj.Name = STATE_NAMES[stateCode];
+          obj.Vaccine1 = ((data[stateCode]?.total?.vaccinated1 / data[stateCode]?.meta.population) * 100).toFixed(2)
+          obj.Vaccine2 = ((data[stateCode]?.total?.vaccinated2 / data[stateCode]?.meta.population) * 100).toFixed(2)
+          obj.count1 = data[stateCode]?.total?.vaccinated1;
+          obj.count2 = data[stateCode]?.total?.vaccinated2;
+          obj.Date = data[stateCode]?.meta?.date ?? ''
+          if (obj.Vaccine1 > 100) {
+            obj.Vaccine1 = 100
+            console.log('greater', obj)
+          }
+          if (obj.Vaccine2 > 100) {
+            obj.Vaccine2 = 100
+          }
+          if (obj.Vaccine1 && obj.Vaccine2 && obj.Vaccine1 <= 100 && obj.Vaccine2 <= 100) {
+            details.push(obj)
           }
         }
-      })
+      } else {
+        Object.keys(data[stateCode].districts).forEach((district) => {
+          if (data[stateCode].districts?.[district]?.total?.vaccinated1 && data[stateCode].districts?.[district]?.total?.vaccinated2 && data[stateCode].districts?.[district]?.meta?.population) {
+            let vaccine1 = ((data[stateCode].districts?.[district]?.total?.vaccinated1 / data[stateCode].districts?.[district]?.meta?.population) * 100).toFixed(2);
+            let vaccine2 = ((data[stateCode].districts?.[district]?.total?.vaccinated2 / data[stateCode].districts?.[district]?.meta?.population) * 100).toFixed(2);
+            if (vaccine1 > 100) {
+              vaccine1 = 100
+            }
+            if (vaccine2 > 100) {
+              vaccine2 = 100
+            }
+            if (vaccine1 && vaccine2 && vaccine1 <= 100 && vaccine2 <= 100) {
+              details.push({
+                "Vaccine1": vaccine1 ?? 0,
+                "Vaccine2": vaccine2 ?? 0,
+                "count1": data[stateCode].districts?.[district]?.total?.vaccinated1,
+                "count2": data[stateCode].districts?.[district]?.total?.vaccinated2,
+                "Name": district,
+                "Date": data[stateCode]?.meta?.date ?? ''
+              })
+            }
+          }
+        })
+      }
       scatter(details)
     }
 

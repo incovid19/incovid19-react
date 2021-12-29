@@ -1,10 +1,10 @@
 import HeaderCell from './HeaderCell';
 import TableLoader from './loaders/Table';
-import {Delta7Icon, DistrictIcon, PerLakhIcon} from './snippets/Icons';
+import { Delta7Icon, DistrictIcon, PerLakhIcon } from './snippets/Icons';
 import TableDeltaHelper from './snippets/TableDeltaHelper';
 import Tooltip from './Tooltip';
 
-import {TABLE_FADE_IN, TABLE_FADE_OUT} from '../animations';
+import { TABLE_FADE_IN, TABLE_FADE_OUT } from '../animations';
 import {
   DISTRICT_TABLE_COUNT,
   STATE_NAMES,
@@ -13,7 +13,7 @@ import {
   TABLE_STATISTICS_EXPANDED,
   UNASSIGNED_STATE_CODE,
 } from '../constants';
-import {getStatistic, retry} from '../utils/commonFunctions';
+import { getStatistic, retry } from '../utils/commonFunctions';
 
 import {
   FoldDownIcon,
@@ -28,17 +28,17 @@ import {
 import classnames from 'classnames';
 import equal from 'fast-deep-equal';
 import produce from 'immer';
-import {memo, useCallback, useEffect, useMemo, useState, lazy} from 'react';
+import { memo, useCallback, useEffect, useMemo, useState, lazy } from 'react';
 import {
   ChevronLeft,
   ChevronsLeft,
   ChevronRight,
   ChevronsRight,
 } from 'react-feather';
-import {useTranslation} from 'react-i18next';
-import {Link} from 'react-router-dom';
-import {useTrail, useTransition, animated, config} from 'react-spring';
-import {useKeyPressEvent, useMeasure, useSessionStorage} from 'react-use';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { useTrail, useTransition, animated, config } from 'react-spring';
+import { useKeyPressEvent, useMeasure, useSessionStorage } from 'react-use';
 // eslint-disable-next-line
 import worker from 'workerize-loader!../workers/getDistricts';
 
@@ -57,7 +57,7 @@ function Table({
   lastDataDate,
   noDistrictDataStates,
 }) {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const [sortData, setSortData] = useSessionStorage('sortData', {
     sortColumn: 'confirmed',
     isAscending: false,
@@ -66,7 +66,7 @@ function Table({
   const [page, setPage] = useState(0);
   const [delta7Mode, setDelta7Mode] = useState(false);
 
-  const [tableContainerRef, {width: tableWidth}] = useMeasure();
+  const [tableContainerRef, { width: tableWidth }] = useMeasure();
 
   const handleSortClick = useCallback(
     (statistic) => {
@@ -94,8 +94,8 @@ function Table({
   );
 
   const trail = useTrail(5, {
-    from: {transform: 'translate3d(0, 10px, 0)', opacity: 0},
-    to: {transform: 'translate3d(0, 0px, 0)', opacity: 1},
+    from: { transform: 'translate3d(0, 10px, 0)', opacity: 0 },
+    to: { transform: 'translate3d(0, 0px, 0)', opacity: 1 },
     config: config.wobbly,
   });
 
@@ -125,9 +125,11 @@ function Table({
   );
 
   const districts = useMemo(() => {
+    console.log('districts', allDistricts)
     if (!isPerLakh) {
       return allDistricts;
     } else {
+      console.log('districts', allDistricts)
       return Object.keys(allDistricts || {})
         .filter(
           (districtKey) =>
@@ -194,7 +196,9 @@ function Table({
     const workerInstance = worker();
     workerInstance.getDistricts(states);
     workerInstance.addEventListener('message', (message) => {
+      console.log('districts', message.data.type)
       if (message.data.type !== 'RPC') {
+        console.log('districts', message.data)
         setAllDistricts(message.data);
         workerInstance.terminate();
       }
@@ -312,7 +316,7 @@ function Table({
       {transition(
         (style, item) =>
           item && (
-            <animated.div className="table-helper" {...{style}}>
+            <animated.div className="table-helper" {...{ style }}>
               <div className="helper-top">
                 <div className="helper-left">
                   <div className="info-item">
@@ -366,7 +370,7 @@ function Table({
                   <div className="info-item">
                     <p>{t('Units')}</p>
                   </div>
-                  {Object.entries({'1K': 3, '1L': 5, '1Cr': 7}).map(
+                  {Object.entries({ '1K': 3, '1L': 5, '1Cr': 7 }).map(
                     ([abbr, exp]) => (
                       <div className="info-item abbr" key={abbr}>
                         <h5>{abbr}</h5>
@@ -434,6 +438,7 @@ function Table({
               )
               .sort((a, b) => sortingFunction(a, b))
               .map((stateCode) => {
+                console.log('state', stateCode)
                 return (
                   <Row
                     key={stateCode}
@@ -465,6 +470,7 @@ function Table({
               .map((districtKey) => {
                 const noDistrictData =
                   noDistrictDataStates[districts[districtKey].stateCode];
+                { console.log(districts, districtKey, districts[districtKey]) }
                 return (
                   <Row
                     key={districtKey}
@@ -498,27 +504,28 @@ function Table({
       </div>
       {showDistricts && (
         <div className="paginate">
+          {console.log('districts', showDistricts)}
           <div
-            className={classnames('left', {disabled: page === 0})}
+            className={classnames('left', { disabled: page === 0 })}
             onClick={handlePageClick.bind(this, -2)}
           >
             <ChevronsLeft size={16} />
           </div>
           <div
-            className={classnames('left', {disabled: page === 0})}
+            className={classnames('left', { disabled: page === 0 })}
             onClick={handlePageClick.bind(this, -1)}
           >
             <ChevronLeft size={16} />
           </div>
           <h5>{`${page + 1} / ${numPages}`}</h5>
           <div
-            className={classnames('right', {disabled: page === numPages - 1})}
+            className={classnames('right', { disabled: page === numPages - 1 })}
             onClick={handlePageClick.bind(this, 1)}
           >
             <ChevronRight size={16} />
           </div>
           <div
-            className={classnames('right', {disabled: page === numPages - 1})}
+            className={classnames('right', { disabled: page === numPages - 1 })}
             onClick={handlePageClick.bind(this, 2)}
           >
             <ChevronsRight size={16} />

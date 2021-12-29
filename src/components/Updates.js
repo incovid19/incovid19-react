@@ -19,9 +19,9 @@ function Updates({ updates }) {
 
   return (
     <div className="updates">
-      <div className="updates-header">
+      {/* <div className="updates-header">
         <h2>{format(currentDate, 'd MMM')}</h2>
-      </div>
+      </div> */}
 
       {updates
         .slice(-UPDATES_COUNT)
@@ -36,9 +36,10 @@ function Updates({ updates }) {
             return (
               <>
                 {index === 0 ? (
-                  <div className="update">
-                    {/* <h4>{t('Updates awaited...')}</h4> */}
-                  </div>
+                  <div></div>
+                  // <div className="update">
+                  //   <h4>{t('Updates awaited...')}</h4>
+                  // </div>
                 ) : (
                   ''
                 )}

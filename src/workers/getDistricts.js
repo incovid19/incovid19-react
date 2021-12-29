@@ -1,6 +1,7 @@
 import produce from 'immer';
 
 export const getDistricts = (data) => {
+  console.log('data', data)
   let districts = {};
 
   Object.keys(data).map((stateCode) => {
@@ -15,6 +16,6 @@ export const getDistricts = (data) => {
     });
     return null;
   });
-
+  console.log('districts', districts)
   postMessage(districts);
 };
