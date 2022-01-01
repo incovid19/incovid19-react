@@ -13,7 +13,7 @@ import {
   formatISO,
   subDays,
 } from 'date-fns';
-import { utcToZonedTime } from 'date-fns-tz';
+import {utcToZonedTime} from 'date-fns-tz';
 import i18n from 'i18next';
 
 let locale = null;
@@ -25,7 +25,7 @@ const getLocale = () => {
   import('date-fns/locale/').then((localePackage) => {
     locale =
       localePackage[
-      LOCALE_SHORTHANDS[i18n.language || window.localStorage.i18nextLng]
+        LOCALE_SHORTHANDS[i18n.language || window.localStorage.i18nextLng]
       ];
   });
 };
@@ -41,7 +41,7 @@ export const getIndiaDate = () => {
 };
 
 export const getIndiaDateISO = () => {
-  return formatISO(getIndiaDate(), { representation: 'date' });
+  return formatISO(getIndiaDate(), {representation: 'date'});
 };
 
 export const getIndiaDateYesterday = () => {
@@ -49,13 +49,13 @@ export const getIndiaDateYesterday = () => {
 };
 
 export const getIndiaDateYesterdayISO = () => {
-  return formatISO(getIndiaDateYesterday(), { representation: 'date' });
+  return formatISO(getIndiaDateYesterday(), {representation: 'date'});
 };
 
 export const formatLastUpdated = (unformattedDate) => {
   if (unformattedDate) {
     if (typeof unformattedDate === 'string') {
-      unformattedDate.trim();
+      unformattedDate = unformattedDate.trim();
       if (unformattedDate.indexOf(' ') != -1) {
         unformattedDate = unformattedDate.replace(' ', 'T');
         if (unformattedDate.indexOf('.') != -1) {
@@ -79,7 +79,7 @@ export const parseIndiaDate = (unformattedDate) => {
     return getIndiaDate();
   }
   if (typeof unformattedDate === 'string') {
-    unformattedDate.trim();
+    unformattedDate = unformattedDate.trim();
     if (unformattedDate.indexOf(' ') != -1) {
       unformattedDate = unformattedDate.replace(' ', 'T');
       if (unformattedDate.indexOf('.') != -1) {
@@ -99,6 +99,7 @@ export const parseIndiaDate = (unformattedDate) => {
     unformattedDate += INDIA_ISO_SUFFIX;
   }
 
+  console.log(new Date(unformattedDate), unformattedDate, 'After');
   return utcToZonedTime(new Date(unformattedDate), 'Asia/Kolkata');
 };
 
@@ -106,7 +107,7 @@ export const formatDate = (unformattedDate, formatString) => {
   // console.log(unformattedDate);
   if (!unformattedDate) return '';
   if (typeof unformattedDate === 'string') {
-    unformattedDate.trim();
+    unformattedDate = unformattedDate.trim();
     if (unformattedDate.indexOf(' ') != -1) {
       unformattedDate = unformattedDate.replace(' ', 'T');
       if (unformattedDate.indexOf('.') != -1) {
@@ -256,8 +257,8 @@ export const getStatistic = (
     val =
       type === 'total'
         ? 100 *
-        ((confirmedDeltaLastWeek - confirmedDeltaTwoWeeksAgo) /
-          confirmedDeltaTwoWeeksAgo)
+          ((confirmedDeltaLastWeek - confirmedDeltaTwoWeeksAgo) /
+            confirmedDeltaTwoWeeksAgo)
         : 0;
   } else if (statistic === 'population') {
     val = type === 'total' ? data?.meta?.population : 0;
