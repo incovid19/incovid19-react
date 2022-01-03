@@ -236,10 +236,9 @@ const VaccinationScatterPlot = (props) => {
         .attr('transform', 'translate(0,' + height + ')')
         .call(xAxis)
         .append('text')
-        .attr('fill', 'red')
-        .attr('transform', 'translate(' + width + ',-30)')
-        .attr('dy', '4em')
-        .attr('text-anchor', 'end')
+        .style('fill', 'red')
+        .attr('transform', 'translate(' + (width/2) + ", 30)")
+        .attr('text-anchor', 'middle')
         .text('Vaccine Dose 1 %');
 
       svg
@@ -248,9 +247,11 @@ const VaccinationScatterPlot = (props) => {
         .attr('transform', 'translate(' + width + ', 0)')
         .call(yAxis)
         .append('text')
-        .attr('transform', 'rotate(0)')
-        .attr('dy', '-0.8em')
-        .attr('text-anchor', 'end')
+        .attr('transform', 'rotate(-90)')
+        .attr("y", 40)
+        .attr("x", 0 - (height / 2))
+        .attr('text-anchor', 'middle')
+        .style("fill", "red")
         .text('Vaccine Dose 2 %');
 
       /*
