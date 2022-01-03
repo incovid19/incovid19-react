@@ -73,7 +73,7 @@ function Models() {
         <div className="wrapper">
           <div
             className={classnames('collaborators', 'fadeInUp')}
-            style={{animationDelay: '0.1s', fontSize: '2rem'}}
+            style={{animationDelay: '0.1s', fontSize: '1.5rem'}}
           >
             Models and Forecasts
           </div>

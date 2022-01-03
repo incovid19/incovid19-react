@@ -903,7 +903,6 @@ h6 {
       align-items: center;
       background-color: $green-light;
       color: $green;
-      display: flex;
       padding: 1px;
       text-decoration: none;
       white-space: nowrap;
@@ -4129,7 +4128,6 @@ footer {
         min-width: 0;
         pointer-events: none;
         position: relative;
-        white-space: nowrap;
         width: 100%;
 
         > * {
