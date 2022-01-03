@@ -7,6 +7,8 @@ import {lazy, useState, Suspense, useEffect} from 'react';
 import {Route, Redirect, Switch, useLocation} from 'react-router-dom';
 const Home = lazy(() => retry(() => import('./components/Home')));
 const Volunteers = lazy(() => retry(() => import('./components/Volunteers')));
+const Models = lazy(() => retry(() => import('./components/Models')));
+
 const About = lazy(() => retry(() => import('./components/About')));
 const State = lazy(() => retry(() => import('./components/State')));
 const Faq = lazy(() => retry(() => import('./components/Faq')));
@@ -30,6 +32,12 @@ const App = () => {
       pageLink: '/collaborators',
       view: Volunteers,
       displayName: 'Collaborators',
+      showInNavbar: true,
+    },
+    {
+      pageLink: '/models',
+      view: Models,
+      displayName: 'Models and Forecasts',
       showInNavbar: true,
     },
     {
