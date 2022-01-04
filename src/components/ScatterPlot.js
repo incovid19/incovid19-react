@@ -147,7 +147,6 @@ const VaccinationScatterPlot = (props) => {
      * If we place the mouse over a circle the tooltip is going to show up.
      */
     function showToolTip(d, i) {
-      console.log('tooltip', d);
       tooltip.style({
         display: 'block',
         'min-height': '100px',
@@ -211,7 +210,6 @@ const VaccinationScatterPlot = (props) => {
      * If we mouse out then the tooltip is hidding
      */
     function hideToolTip(d, i) {
-      console.log('tooltip', d);
       tooltip.style({
         display: 'none',
       });
@@ -321,7 +319,6 @@ const VaccinationScatterPlot = (props) => {
             obj.Date = data[state]?.meta?.date ?? '';
             if (obj.Vaccine1 > 100) {
               obj.Vaccine1 = 100;
-              console.log('greater', obj);
             }
             if (obj.Vaccine2 > 100) {
               obj.Vaccine2 = 100;
@@ -361,7 +358,6 @@ const VaccinationScatterPlot = (props) => {
             obj.Date = data[state]?.meta?.date ?? '';
             if (obj.Vaccine1 > 100) {
               obj.Vaccine1 = 100;
-              console.log('greater', obj);
             }
             if (obj.Vaccine2 > 100) {
               obj.Vaccine2 = 100;

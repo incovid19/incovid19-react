@@ -99,12 +99,10 @@ export const parseIndiaDate = (unformattedDate) => {
     unformattedDate += INDIA_ISO_SUFFIX;
   }
 
-  console.log(new Date(unformattedDate), unformattedDate, 'After');
   return utcToZonedTime(new Date(unformattedDate), 'Asia/Kolkata');
 };
 
 export const formatDate = (unformattedDate, formatString) => {
-  // console.log(unformattedDate);
   if (!unformattedDate) return '';
   if (typeof unformattedDate === 'string') {
     unformattedDate = unformattedDate.trim();
@@ -222,7 +220,6 @@ export const getStatistic = (
   } else if (normalizedByPopulationPer === 'hundred') {
     multiplyFactor *= 1e2 / data?.meta?.population;
   }
-  // console.log(statistic);
   let val;
   if (statistic === 'active' || statistic === 'activeRatio') {
     const confirmed = data?.[type]?.confirmed || 0;
