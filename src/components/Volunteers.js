@@ -140,7 +140,6 @@ function Volunteers() {
       name: 'Student Volunteers',
     },
   ];
-  console.log(dataAugemented);
   const transition = useTransition(dataAugemented, {
     keys: (item) => item?.name || 'last',
     delay: 200,

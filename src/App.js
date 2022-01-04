@@ -63,7 +63,6 @@ const App = () => {
 
   useEffect(() => {
     countapi.visits('incovid19').then((result) => {
-      console.log(result.value);
       // getCount(result.value);
     });
   }, []);
