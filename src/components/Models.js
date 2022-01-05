@@ -26,6 +26,10 @@ function Member({className, style, title, link = {}}) {
 function Models() {
   const dataAugemented = [
     {
+      link: 'https://www.isibang.ac.in/~athreya/incovid19/omicron.php',
+      title: 'Omicron Forecasts',
+    },
+    {
       link: 'https://www.isibang.ac.in/~athreya/incovid19/ktest.php',
       title: 'Early Warning System for Karnataka',
     },
