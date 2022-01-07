@@ -1,5 +1,7 @@
 # Stage 0, "build-stage", based on Node.js, to build and compile the frontend
 FROM node:16 as build-stage
+  ARG REACT_APP_DATA_API_ROOT
+  ENV REACT_APP_DATA_API_ROOT=$REACT_APP_DATA_API_ROOT
   WORKDIR /app
   COPY ./ /app/
   RUN npm install
