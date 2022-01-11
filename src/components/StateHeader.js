@@ -45,7 +45,7 @@ function StateHeader({data, stateCode}) {
       <div className="header-right fadeInUp" style={trail[2]}>
         <h5>{t('Tested')}</h5>
         <animated.h2>
-          {spring.total.to((total) => formatNumber(total, 'long'))}
+          {spring.total.to((total) => formatNumber(total, 'long', 'tested'))}
         </animated.h2>
         {data?.meta?.tested?.date && (
           <h5 className="timestamp">
