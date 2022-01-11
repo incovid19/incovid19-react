@@ -12,7 +12,7 @@ function About() {
     faq: [
       {
         answer:
-          'We would like to acknowledge the contribution of the <a href="https://covid19india.org" target="_blank">covid19india.org</a> team of volunteers for their tireless efforts in creating and maintaining the site from the start of the pandemic and also in making their codebase open source and available for use by all.\nThis website <a href="www.incovid19.org" target="_blank">www.incovid19.org</a> is largely built on top of the open-source codebase of <a href="https://covid19india.org" target="_blank">covid19india.org</a>',
+          'We would like to acknowledge the contribution of the <a href="https://covid19india.org" target="_blank">covid19india.org</a> team of volunteers for their tireless efforts in creating and maintaining the site from the start of the pandemic and also in making their codebase open source and available for use by all.\nThis website <a href="www.incovid19.org" target="_blank">www.incovid19.org</a> is largely built on top of the open-source codebase of <a href="https://covid19india.org" target="_blank">covid19india.org</a>. We have also received many acknowledgments for continuing this work. Here\'s a <a href="https://docs.google.com/document/d/1RM0PcM0D7FLW1YUu2QeYhFJYOR1zwcd1woqHqEqblEw/" target="_blank">compilation</a>. Thank you for keeping us motivated.',
         category: 'General',
         qno: '1',
         question: 'Acknowledgements',
