@@ -1,0 +1,2 @@
+(this.webpackJsonpincovid19=this.webpackJsonpincovid19||[]).push([[42],{258:function(a,e,t){"use strict";t.r(e);var n=t(296),s=t(19);e.default=function(a){var e=Object(n.a)().t;return Object(s.jsx)("div",{className:"Banner fadeInDown",style:{animationDelay:"0.4s"},children:Object(s.jsx)("div",{className:"wrapper",children:Object(s.jsx)("div",{className:"content",children:e("Portal updates delayed due to non-availability of data from state and central govt portals. We will update soon.")})})})}}}]);
+//# sourceMappingURL=42.8f6c4cae.chunk.js.map
