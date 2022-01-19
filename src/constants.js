@@ -70,6 +70,14 @@ export const STATISTIC_CONFIGS = {
     hideZero: true,
     category: 'vaccinated',
   },
+  vaccinated3: {
+    displayName: 'precaution dose',
+    color: '#fb5581',
+    format: 'short',
+    showDelta: true,
+    hideZero: true,
+    category: 'vaccinated',
+  },
   other: {
     displayName: 'other',
     format: 'long',

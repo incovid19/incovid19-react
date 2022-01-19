@@ -2225,7 +2225,8 @@ abbr {
 
     .is-vaccinated,
     .is-vaccinated1,
-    .is-vaccinated2 {
+    .is-vaccinated2,
+    .is-vaccinated3 {
       svg {
         color: $pink;
       }
@@ -2465,7 +2466,8 @@ abbr {
 
         &.is-vaccinated,
         &.is-vaccinated1,
-        &.is-vaccinated2 {
+        &.is-vaccinated2,
+        &.is-vaccinated3 {
           svg {
             color: $pink;
           }
@@ -2504,7 +2506,8 @@ abbr {
 
         .is-vaccinated,
         .is-vaccinated1,
-        .is-vaccinated2 {
+        .is-vaccinated2,
+        .is-vaccinated3 {
           color: $pink;
         }
       }
@@ -2919,7 +2922,8 @@ abbr {
 
       &.is-vaccinated,
       &.is-vaccinated1,
-      &.is-vaccinated2 {
+      &.is-vaccinated2,
+      &.is-vaccinated3 {
         color: $pink-mid;
 
         .is-highlighted {
