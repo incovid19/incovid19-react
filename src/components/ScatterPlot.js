@@ -18,11 +18,7 @@ const VaccinationScatterPlot = (props) => {
     };
 
     const currentdate = getCurrentDate(json[0]?.Date ?? json[1]?.Date);
-    /*
-     * The next block of code selects the id scatterplot-stats on the web page
-     * and appends an svg object to it of the size
-     * that we have set up with our width, height and margin’s.
-     */
+
     d3.selectAll(id).selectAll('svg').remove();
     d3.selectAll(id).selectAll('#date').remove();
     d3.select(id)
@@ -43,7 +39,6 @@ const VaccinationScatterPlot = (props) => {
     const y = d3.scale.linear().range([height, 0]);
     const x = d3.scale.linear().range([0, width]);
 
-    // let prefix = d3.formatPrefix(1.21e9);
     const xAxis = d3.svg
       .axis()
       .scale(x)
@@ -70,19 +65,14 @@ const VaccinationScatterPlot = (props) => {
       .attr('height', height + margin.top + margin.bottom)
       .attr('x', 0)
       .attr('y', 0)
-      .attr('fill', '#E3E2F3')
+      .attr('fill', 'none')
       .attr('rx', 4)
       .attr('fill-opacity', 1);
-    // It also adds a g element that provides a reference point for adding our axes.
     svg = svg
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
     const tooltip = d3.select(id).append('div').attr('class', 'tooltip');
-
-    // function getColor(arg) {
-    //   return getRandomColor()
-    // }
 
     function getRandomColor(str) {
       const colorObj = {
@@ -124,28 +114,10 @@ const VaccinationScatterPlot = (props) => {
         UT: 'rgb(128,128,128)',
         WB: 'rgb(255,218,185)',
       };
-      // const letters = '0123456789ABCDEF';
-      // let color = '#';
-      // for (let i = 0; i < 6; i++) {
-      //   color += letters[Math.floor(Math.random() * 16)];
-      // }
+
       return colorObj[str];
-      // let hash = 0;
-      // for (let i = 0; i < str.length; i++) {
-      //   hash = str.charCodeAt(i) + ((hash << 5) - hash);
-      // }
-      // let colour = '#';
-      // for (let i = 0; i < 3; i++) {
-      //   const value = (hash >> (i * 8)) & 0xFF;
-      //   colour += ('00' + value.toString(16)).substr(-2);
-      // }
-      // return colour;
     }
 
-    /*
-     * this function is like mouse over.
-     * If we place the mouse over a circle the tooltip is going to show up.
-     */
     function showToolTip(d, i) {
       tooltip.style({
         display: 'block',
@@ -155,13 +127,11 @@ const VaccinationScatterPlot = (props) => {
         opacity: 1,
         'background-color': d.color,
       });
-      // const circle = d3.event.target;
-      // const tippadding = 5;
       const tipsize = {
         dx: parseInt(tooltip.style('width')),
         dy: parseInt(tooltip.style('height')),
       };
-      if (id === '#scatterplotstate-stats') {
+      if (id === '.sc-plot-state') {
         tooltip
           .style({
             top: d3.event.pageY - tipsize.dy - 5 + 'px',
@@ -180,7 +150,7 @@ const VaccinationScatterPlot = (props) => {
               'Total Vaccinations: ' +
               d.Total
           );
-      } else if (id === '#scatterplottotal-stats') {
+      } else if (id === '.sc-plot-total') {
         tooltip
           .style({
             top: d3.event.pageY - tipsize.dy - 5 + 'px',
@@ -205,22 +175,11 @@ const VaccinationScatterPlot = (props) => {
       }
     }
 
-    /*
-     * This function is like mouse out.
-     * If we mouse out then the tooltip is hidding
-     */
     function hideToolTip(d, i) {
       tooltip.style({
         display: 'none',
       });
     }
-
-    /*
-     * d3.json takes the variable url and two more parameters
-     * if error, then throw it
-     * else map the time-date in the horizontal axis and the rank-position in the verticall axis
-     */
-    // d3.json(json, (error, data) => {
     const data = json;
     if (!data) {
       throw new Error('d3.json error');
@@ -235,7 +194,7 @@ const VaccinationScatterPlot = (props) => {
         .call(xAxis)
         .append('text')
         .style('fill', 'red')
-        .attr('transform', 'translate(' + (width/2) + ", 30)")
+        .attr('transform', 'translate(' + width / 2 + ', 30)')
         .attr('text-anchor', 'middle')
         .text('Vaccine Dose 1 %');
 
@@ -246,26 +205,18 @@ const VaccinationScatterPlot = (props) => {
         .call(yAxis)
         .append('text')
         .attr('transform', 'rotate(-90)')
-        .attr("y", 40)
-        .attr("x", 0 - (height / 2))
+        .attr('y', 40)
+        .attr('x', 0 - height / 2)
         .attr('text-anchor', 'middle')
-        .style("fill", "red")
+        .style('fill', 'red')
         .text('Vaccine Dose 2 %');
 
-      /*
-       * we add the cyclists to our scatterplot
-       * This block of code creates the cyclists (selectAll(".cyclist"))
-       * and associates each of them with a data set (.data(data)).
-       * We then append a circle
-       * with values for x/y position and height/width as configured in our earlier code.
-       * we parse the time and the place
-       */
       const districts = svg
-        .selectAll('.cyclist')
+        .selectAll('.vac-sc-plot')
         .data(data)
         .enter()
         .append('g')
-        .attr('class', 'cyclist')
+        .attr('class', 'vac-sc-plot')
         .attr('x', (d) => {
           return x(d.Vaccine1);
         })
@@ -374,21 +325,23 @@ const VaccinationScatterPlot = (props) => {
           }
         });
       });
-      scatter(stateDetails, '#scatterplotstate-stats');
-      scatter(details, '#scatterplottotal-stats');
+      scatter(stateDetails, '.sc-plot-state');
+      scatter(details, '.sc-plot-total');
     }
   }, [data]);
 
   return (
     <div className="Home homegraph">
       <div className="home-left home-left--graphmargin">
-        <div id="scatterplotstate-stats">
+        <div className="scatterplot">
           <h1 className="text-center ">Vaccination Coverage (States)</h1>
+          <div className="sc-plot-state"></div>
         </div>
       </div>
       <div className="home-right home-right--graphmargin">
-        <div id="scatterplottotal-stats">
+        <div className="scatterplot">
           <h1 className="text-center ">Vaccination Coverage (Districts)</h1>
+          <div className="sc-plot-total"></div>
         </div>
       </div>
     </div>
