@@ -93,20 +93,16 @@ function State() {
       return `${date < 10 ? `0${date}` : `${date}`}${separator}${month}`;
     };
     const currentdate = getCurrentDate(json[0]?.Date);
-    /*
-     * The next block of code selects the id scatterplot-stats on the web page
-     * and appends an svg object to it of the size
-     * that we have set up with our width, height and margin’s.
-     */
-    d3.selectAll('#scatterplot-stats').selectAll('svg').remove();
-    d3.selectAll('#scatterplot-stats').selectAll('#date').remove();
-    d3.select('#scatterplot-stats')
+
+    d3.selectAll('.sc-plot-district').selectAll('svg').remove();
+    d3.selectAll('.sc-plot-district').selectAll('#date').remove();
+    d3.select('.sc-plot-district')
       .append('div')
       .attr('id', 'date')
       .attr('class', 'graphtext')
       .html(`${currentdate}`);
     let svg = d3
-      .select('#scatterplot-stats')
+      .select('.sc-plot-district')
       .append('svg')
       .attr('viewBox', `0 0 ${widthValue} ${heightValue}`);
 
@@ -118,7 +114,6 @@ function State() {
     const y = d3.scale.linear().range([height, 0]);
     const x = d3.scale.linear().range([0, width]);
 
-    // let prefix = d3.formatPrefix(1.21e9);
     const xAxis = d3.svg
       .axis()
       .scale(x)
@@ -145,22 +140,17 @@ function State() {
       .attr('height', height + margin.top + margin.bottom)
       .attr('x', 0)
       .attr('y', 0)
-      .attr('fill', '#E3E2F3')
+      .attr('fill', 'none')
       .attr('rx', 4)
       .attr('fill-opacity', 1);
-    // It also adds a g element that provides a reference point for adding our axes.
     svg = svg
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
     const tooltip = d3
-      .select('#scatterplot-stats')
+      .select('.sc-plot-district')
       .append('div')
       .attr('class', 'tooltip');
-
-    // function getColor(arg) {
-    //   return getRandomColor()
-    // }
 
     function getRandomColor() {
       const letters = '0123456789ABCDEF';
@@ -171,10 +161,6 @@ function State() {
       return color;
     }
 
-    /*
-     * this function is like mouse over.
-     * If we place the mouse over a circle the tooltip is going to show up.
-     */
     function showToolTip(d, i) {
       tooltip.style({
         display: 'block',
@@ -210,22 +196,12 @@ function State() {
         );
     }
 
-    /*
-     * This function is like mouse out.
-     * If we mouse out then the tooltip is hidding
-     */
     function hideToolTip(d, i) {
       tooltip.style({
         display: 'none',
       });
     }
 
-    /*
-     * d3.json takes the variable url and two more parameters
-     * if error, then throw it
-     * else map the time-date in the horizontal axis and the rank-position in the verticall axis
-     */
-    // d3.json(json, (error, data) => {
     const data = json;
     if (!data) {
       throw new Error('d3.json error');
@@ -239,10 +215,9 @@ function State() {
         .attr('transform', 'translate(0,' + height + ')')
         .call(xAxis)
         .append('text')
-        .attr('fill', 'red')
-        .attr('transform', 'translate(' + width + ',-30)')
-        .attr('dy', '4.5em')
-        .attr('text-anchor', 'end')
+        .style('fill', 'red')
+        .attr('transform', 'translate(' + width / 2 + ', 30)')
+        .attr('text-anchor', 'middle')
         .text('Vaccine Dose 1 %');
 
       svg
@@ -251,9 +226,11 @@ function State() {
         .attr('transform', 'translate(' + width + ', 0)')
         .call(yAxis)
         .append('text')
-        .attr('transform', 'rotate(0)')
-        .attr('dy', '-0.8em')
-        .attr('text-anchor', 'end')
+        .attr('transform', 'rotate(-90)')
+        .attr('y', 40)
+        .attr('x', 0 - height / 2)
+        .attr('text-anchor', 'middle')
+        .style('fill', 'red')
         .text('Vaccine Dose 2 %');
 
       const districts = svg
@@ -375,39 +352,6 @@ function State() {
       }
       scatter(details);
     }
-
-    // scatter([
-    //     {
-    // "Time": 300000,
-    // "Place": 10000,
-    // "Seconds": 2210,
-    // "Name": "Marco Pantani",
-    // "Year": 1995,
-    // "Nationality": "ITA",
-    // "Doping": "Alleged drug use during 1995 due to high hematocrit levels",
-    // "URL": "https://en.wikipedia.org/wiki/Marco_Pantani#Alleged_drug_use"
-    //   },
-    //           {
-    // "Time": 3504,
-    // "Place": 3300,
-    // "Seconds": 2210,
-    // "Name": "Marco Pantani",
-    // "Year": 1995,
-    // "Nationality": "ITA",
-    // "Doping": "Alleged drug use during 1995 due to high hematocrit levels",
-    // "URL": "https://en.wikipedia.org/wiki/Marco_Pantani#Alleged_drug_use"
-    //   },
-    // {
-    // "Time": 55,
-    // "Place": 100,
-    // "Seconds": 2210,
-    // "Name": "Marco Pantani",
-    // "Year": 1995,
-    // "Nationality": "ITA",
-    // "Doping": "Alleged drug use during 1995 due to high hematocrit levels",
-    // "URL": "https://en.wikipedia.org/wiki/Marco_Pantani#Alleged_drug_use"
-    // },
-    //   ]);
   }, [regionHighlighted.stateCode, stateCode, stateData, data]);
 
   const toggleShowAllDistricts = () => {
@@ -692,17 +636,15 @@ function State() {
                 }}
                 forceRender={!!timeseriesResponseError}
               />
-              <div id="scatterplot-stats">
-                <h1 lassName="text-center ">{t('Vaccination Coverage')}</h1>
+              <div className="scatterplot">
+                <h1 className="text-center ">{t('Vaccination Coverage')}</h1>
+                <div className="sc-plot sc-plot-district"></div>
               </div>
             </Suspense>
           </>
         </div>
       </div>
-      {/* <div className="chartflex">
-        <div className="flex1">&nbsp;</div> */}
-      <div></div>
-      {/* </div> */}
+
       <Footer />
     </>
   );
