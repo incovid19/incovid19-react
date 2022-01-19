@@ -5723,12 +5723,12 @@ footer {
 
 .axis {
   fill: none;
-  stroke: #4B1EAA;
+  stroke: $pink;
   stroke-width: 2;
 }
 
 .axis text {
-  fill: #9E8AD2;
+  fill: $pink;
   stroke: none;
   font-size: 0.9rem;
   font-weight: 600;
@@ -5764,7 +5764,7 @@ footer {
   position: relative;
   top:30px;
   margin-left:15px;
-  color: #4B1EAA;
+  color: $pink;
 }
 
 .flexdiv{
@@ -5782,4 +5782,8 @@ footer {
 .coverage-header{
   margin-left: 5rem;
   color: $gray;
+}
+
+.sc-plot {
+  background-color: $pink-light
 }

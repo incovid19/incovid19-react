@@ -335,13 +335,13 @@ const VaccinationScatterPlot = (props) => {
       <div className="home-left home-left--graphmargin">
         <div className="scatterplot">
           <h1 className="text-center ">Vaccination Coverage (States)</h1>
-          <div className="sc-plot-state"></div>
+          <div className="sc-plot sc-plot-state"></div>
         </div>
       </div>
       <div className="home-right home-right--graphmargin">
         <div className="scatterplot">
           <h1 className="text-center ">Vaccination Coverage (Districts)</h1>
-          <div className="sc-plot-total"></div>
+          <div className="sc-plot sc-plot-total"></div>
         </div>
       </div>
     </div>
