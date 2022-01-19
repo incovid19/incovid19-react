@@ -257,11 +257,11 @@ function State() {
         .text('Vaccine Dose 2 %');
 
       const districts = svg
-        .selectAll('.cyclist')
+        .selectAll('.vac-sc-plot')
         .data(data)
         .enter()
         .append('g')
-        .attr('class', 'cyclist')
+        .attr('class', 'vac-sc-plot')
         .attr('x', (d) => {
           return x(d.Vaccine1);
         })

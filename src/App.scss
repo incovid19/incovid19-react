@@ -5713,19 +5713,7 @@ footer {
   }
 }
 
-#scatterplottotal-stats {
-  max-width: 100%;
-  margin-top: 2rem;
-  padding: 0px 15px;
-
-    h1 {
-    color: $gray;
-    margin: 0;
-    text-align: center;
-  }
-}
-
-#scatterplotstate-stats {
+.scatterplot {
   max-width: 100%;
   margin-top: 2rem;
   padding: 0px 15px;
@@ -5739,12 +5727,12 @@ footer {
 
 .axis {
   fill: none;
-  stroke: #4B1EAA;
+  stroke: $pink;
   stroke-width: 2;
 }
 
 .axis text {
-  fill: #9E8AD2;
+  fill: $pink;
   stroke: none;
   font-size: 0.9rem;
   font-weight: 600;
@@ -5754,7 +5742,7 @@ footer {
   stroke: #3A3A3A;
 }
 
-.cyclist circle:hover {
+.vac-sc-plot circle:hover {
   cursor: pointer;
   z-index: 100000;
 }
@@ -5780,7 +5768,7 @@ footer {
   position: relative;
   top:30px;
   margin-left:15px;
-  color: #4B1EAA;
+  color: $pink;
 }
 
 .flexdiv{
@@ -5798,4 +5786,8 @@ footer {
 .coverage-header{
   margin-left: 5rem;
   color: $gray;
+}
+
+.sc-plot {
+  background-color: $pink-light
 }
