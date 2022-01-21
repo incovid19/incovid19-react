@@ -26,24 +26,20 @@ function PureLevelItem({statistic, total, delta}) {
     <>
       <h5>{t(capitalize(statisticConfig.displayName))}</h5>
       <animated.h4>
-        {statistic !== 'active' ? (
-          delta > 0 ? (
-            /* Add space after + because react-spring regex bug */
-            spring.delta.to(
-              (delta) =>
-                `+ ${formatNumber(
-                  delta,
-                  statisticConfig.format !== 'short'
-                    ? statisticConfig.format
-                    : 'long',
-                  statistic
-                )}`
-            )
-          ) : (
-            <HeartFillIcon size={9} verticalAlign={2} />
+        {delta > 0 ? (
+          /* Add space after + because react-spring regex bug */
+          spring.delta.to(
+            (delta) =>
+              `+ ${formatNumber(
+                delta,
+                statisticConfig.format !== 'short'
+                  ? statisticConfig.format
+                  : 'long',
+                statistic
+              )}`
           )
         ) : (
-          '\u00A0'
+          <HeartFillIcon size={9} verticalAlign={2} />
         )}
       </animated.h4>
       <animated.h1>

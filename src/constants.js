@@ -31,6 +31,7 @@ export const STATISTIC_CONFIGS = {
     color: '#007bff',
     format: 'long',
     hasPrimary: true,
+    showDelta: true,
   },
   recovered: {
     displayName: 'recovered',
