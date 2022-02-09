@@ -415,6 +415,13 @@ function State() {
 
   const noDistrictData = useMemo(() => {
     // Heuristic: All cases are in Unknown
+    if (
+      stateData?.districts &&
+      !Object.values(stateData?.districts)[0]?.total.recovered > 0 &&
+      (primaryStatistic === 'active' || primaryStatistic === 'recovered')
+    ) {
+      return true;
+    }
     return !!(
       stateData?.districts &&
       stateData.districts?.[UNKNOWN_DISTRICT_KEY] &&
@@ -428,7 +435,7 @@ function State() {
           )
       )
     );
-  }, [stateData]);
+  }, [stateData, primaryStatistic]);
 
   const statisticConfig = STATISTIC_CONFIGS[primaryStatistic];
 
@@ -540,6 +547,13 @@ function State() {
                       .filter((districtName) => districtName !== 'Unknown')
                       .sort((a, b) => handleSort(a, b))
                       .slice(0, showAllDistricts ? undefined : 5)
+                      .filter((districtName) =>
+                        getStatistic(
+                          stateData.districts[districtName],
+                          'total',
+                          primaryStatistic
+                        )
+                      )
                       .map((districtName) => {
                         const total = getStatistic(
                           stateData.districts[districtName],

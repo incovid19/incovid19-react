@@ -227,7 +227,9 @@ export const getStatistic = (
     const recovered = data?.[type]?.recovered || 0;
     const other = data?.[type]?.other || 0;
     const active = confirmed - deceased - recovered - other;
-    if (statistic === 'active') {
+    if (recovered === 0) {
+      val = 0;
+    } else if (statistic === 'active') {
       val = active;
     } else if (statistic === 'activeRatio') {
       val = 100 * (active / confirmed);
