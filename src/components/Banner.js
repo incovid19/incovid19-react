@@ -8,21 +8,24 @@ function Banner(props) {
     <div className="Banner fadeInDown" style={{animationDelay: '0.4s'}}>
       <div className="wrapper">
         <div className="content">
-          {t('Do explore our external links on ')}
-          <Link to="/models">Models and Forecasts.</Link>
+          <Link to="/FAQ">
+            {t('Please read note on ')}
+            <em>Deceased Count Reconciliation </em>
+            {t('and state-wise updates ')}
+          </Link>
+          .
         </div>
 
         <div className="content">
-          {t('Please send suggestions and observations to')}
-          {''}
+          {t('Please send suggestions and observations to ')}
+          <a
+            href="mailto: contact@incovid19.org"
+            rel="noreferrer"
+            target="_blank"
+          >
+            contact@incovid19.org
+          </a>
         </div>
-        <a
-          href="mailto: contact@incovid19.org"
-          rel="noreferrer"
-          target="_blank"
-        >
-          contact@incovid19.org
-        </a>
         {/* &nbsp;{t(' or ')}&nbsp;
         {'  '} */}
         {/* <a
