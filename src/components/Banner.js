@@ -1,5 +1,5 @@
 import {useTranslation} from 'react-i18next';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 
 function Banner(props) {
   const {t} = useTranslation();
@@ -7,14 +7,14 @@ function Banner(props) {
   return (
     <div className="Banner fadeInDown" style={{animationDelay: '0.4s'}}>
       <div className="wrapper">
-        <div className="content">
+        {/* <div className="content">
           <Link to="/FAQ">
             {t('Please read note on ')}
             <em>Deceased Count Reconciliation </em>
             {t('and state-wise updates ')}
           </Link>
           .
-        </div>
+        </div> */}
 
         <div className="content">
           {t('Please send suggestions and observations to ')}
