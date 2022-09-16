@@ -876,8 +876,8 @@ h6 {
 }
 
 .Banner {
-  background: $green-light;
-  color: $green;
+  background: $red-light;
+  color: $red;
   display: flex;
   flex-direction: row;
   font-size: 12px;
@@ -901,8 +901,8 @@ h6 {
 
     a {
       align-items: center;
-      background-color: $green-light;
-      color: $green;
+      background-color: $red-light;
+      color: $red;
       padding: 1px;
       text-decoration: none;
 

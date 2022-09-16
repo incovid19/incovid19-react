@@ -17,13 +17,14 @@ function Banner(props) {
         </div> */}
 
         <div className="content">
-          {t('Please send suggestions and observations to ')}
+          &#9888; &nbsp;
+          {t('Important Update on the future of incovid19.org post 31st October 2022. ')}
           <a
-            href="mailto: contact@incovid19.org"
+            href="/faq"
             rel="noreferrer"
-            target="_blank"
+            target="_self"
           >
-            contact@incovid19.org
+            Read more →
           </a>
         </div>
         {/* &nbsp;{t(' or ')}&nbsp;
