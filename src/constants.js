@@ -1,7 +1,7 @@
-import {scaleOrdinal} from 'd3-scale';
+import { scaleOrdinal } from 'd3-scale';
 export const API_DOMAIN = 'https://data.incovid19.org';
 
-export const DATA_API_ROOT = `${process.env.REACT_APP_DATA_API_ROOT}/v4/min`;
+export const DATA_API_ROOT = `https://data.incovid19.org/v4/min`;
 export const API_REFRESH_INTERVAL = 100000; // seconds
 
 export const LOCALE_SHORTHANDS = {
@@ -222,7 +222,7 @@ export const ISO_DATE_REGEX = /^\d{4}-([0]\d|1[0-2])-([0-2]\d|3[01])$/g;
 
 export const INDIA_ISO_SUFFIX = 'T00:00:00+05:30';
 
-export const SPRING_CONFIG_NUMBERS = {clamp: true, precision: 1};
+export const SPRING_CONFIG_NUMBERS = { clamp: true, precision: 1 };
 
 export const TIMESERIES_CHART_TYPES = {
   total: 'Cumulative',
@@ -449,7 +449,7 @@ const stateCodes = [];
 const stateCodesMap = {};
 Object.keys(STATE_NAMES).map((key, index) => {
   stateCodesMap[STATE_NAMES[key]] = key;
-  stateCodes.push({code: key, name: STATE_NAMES[key]});
+  stateCodes.push({ code: key, name: STATE_NAMES[key] });
   return null;
 });
 export const STATE_CODES = stateCodesMap;
