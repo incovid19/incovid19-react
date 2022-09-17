@@ -12,6 +12,7 @@ const Models = lazy(() => retry(() => import('./components/Models')));
 const About = lazy(() => retry(() => import('./components/About')));
 const State = lazy(() => retry(() => import('./components/State')));
 const Faq = lazy(() => retry(() => import('./components/Faq')));
+const Notice = lazy(() => retry(() => import('./components/Notice')));
 const LanguageSwitcher = lazy(() =>
   retry(() => import('./components/LanguageSwitcher'))
 );
@@ -58,6 +59,12 @@ const App = () => {
       displayName: 'State',
       showInNavbar: false,
     },
+    {
+      pageLink: '/notice',
+      view: Notice,
+      displayName: 'Notice',
+      showInNavbar: true,
+    }
   ];
   // const [visits, getCount] = useState(0);
 

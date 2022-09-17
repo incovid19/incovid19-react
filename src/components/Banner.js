@@ -20,7 +20,7 @@ function Banner(props) {
           &#9888; &nbsp;
           {t('Important Update on the future of incovid19.org post 31st October 2022. ')}
           <a
-            href="/faq"
+            href="/notice"
             rel="noreferrer"
             target="_self"
           >
