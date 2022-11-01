@@ -251,10 +251,6 @@ h6 {
   margin-left: 9rem;
   margin-right: 3rem;
 
-  .homegraph{
-    padding-top: 0rem;
-  }
-
   .home-left,
   .home-right {
     display: flex;
@@ -263,11 +259,6 @@ h6 {
 
   .home-left {
     margin-right: 2.5rem;
-
-    &--graphmargin{
-      margin-left: 2.5rem;
-      margin-right: 0rem;
-    }
   }
 
   .home-right {
@@ -874,7 +865,6 @@ h6 {
     }
   }
 }
-
 .Banner {
   background: $red-light;
   color: $red;
@@ -903,8 +893,10 @@ h6 {
       align-items: center;
       background-color: $red-light;
       color: $red;
+      display: flex;
       padding: 1px;
       text-decoration: none;
+      white-space: nowrap;
 
       &:hover {
         background-color: $red-hover;
@@ -2224,8 +2216,7 @@ abbr {
 
     .is-vaccinated,
     .is-vaccinated1,
-    .is-vaccinated2,
-    .is-vaccinated3 {
+    .is-vaccinated2 {
       svg {
         color: $pink;
       }
@@ -2465,8 +2456,7 @@ abbr {
 
         &.is-vaccinated,
         &.is-vaccinated1,
-        &.is-vaccinated2,
-        &.is-vaccinated3 {
+        &.is-vaccinated2 {
           svg {
             color: $pink;
           }
@@ -2505,8 +2495,7 @@ abbr {
 
         .is-vaccinated,
         .is-vaccinated1,
-        .is-vaccinated2,
-        .is-vaccinated3 {
+        .is-vaccinated2 {
           color: $pink;
         }
       }
@@ -2921,8 +2910,7 @@ abbr {
 
       &.is-vaccinated,
       &.is-vaccinated1,
-      &.is-vaccinated2,
-      &.is-vaccinated3 {
+      &.is-vaccinated2 {
         color: $pink-mid;
 
         .is-highlighted {
@@ -4131,6 +4119,7 @@ footer {
         min-width: 0;
         pointer-events: none;
         position: relative;
+        white-space: nowrap;
         width: 100%;
 
         > * {
@@ -4757,10 +4746,6 @@ footer {
   .Home,
   .State {
     padding-top: 5rem;
-  }
-
-    .homegraph{
-    padding-top: 0rem;
   }
 
   .Navbar {
@@ -5679,69 +5664,36 @@ footer {
   }
 }
 
-.chartflex{
-  display: flex;
-  flex-direction: row;
-  padding: 10%;
-  .flex1{
-    flex: 0 1 50%;
-  }
-
-  .flex2{
-    flex: 0 1 50%;
-    min-width: 300px;
-  }
-}
-
-.align-center{
-  display: flex;
-  width: 100%;
-  justify-content: center;
-
-}
-
 #scatterplot-stats {
   max-width: 100%;
   margin-top: 2rem;
   padding: 0px 15px;
 
-    h1 {
+  h1 {
     color: $gray;
     margin: 0;
     text-align: center;
   }
-}
 
-.scatterplot {
-  max-width: 100%;
-  margin-top: 2rem;
-  padding: 0px 15px;
-
-    h1 {
-    color: $gray;
-    margin: 0;
-    text-align: center;
+  circle {
+    stroke: #3a3a3a;
   }
 }
 
 .axis {
   fill: none;
-  stroke: $pink;
+  stroke: #4b1eaa;
   stroke-width: 2;
 }
 
 .axis text {
-  fill: $pink;
+  fill: #9e8ad2;
   stroke: none;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   font-weight: 600;
 }
 
-.circlegraph {
-  stroke: #3A3A3A;
-}
-
-.vac-sc-plot circle:hover {
+.cyclist circle:hover {
   cursor: pointer;
   z-index: 100000;
 }
@@ -5751,7 +5703,7 @@ footer {
   box-sizing: border-box;
   background-color: rgba(74, 30, 170, 0.658);
   color: #fff;
-  width:0;
+  width: 0;
   height: 0;
   border-radius: 5px;
   font-size: 0.8rem;
@@ -5760,34 +5712,12 @@ footer {
   display: hide;
 }
 
-.graphtext{
+.graphtext {
   font-size: 0.8rem;
   box-sizing: border-box;
   font-weight: 600;
   position: relative;
-  top:30px;
-  margin-left:15px;
-  color: $pink;
-}
-
-.flexdiv{
-  display: flex;
-  width: 100%;
-  .cols1{
-    flex: 0 0 50%;
-  }
-
-  .cols2{
-    flex: 0 0 50%;
-  }
-}
-
-.coverage-header{
-  margin-left: 5rem;
-  color: $gray;
-}
-
-.sc-plot {
-  background-color: $pink-light;
-  margin-top: 1rem;
+  top: 30px;
+  margin-left: 15px;
+  color: #4b1eaa;
 }

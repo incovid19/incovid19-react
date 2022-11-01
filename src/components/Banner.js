@@ -1,5 +1,6 @@
+// import {AlertIcon, ArrowRightIcon} from '@primer/octicons-react';
+// import {AlertIcon} from '@primer/octicons-react';
 import {useTranslation} from 'react-i18next';
-// import {Link} from 'react-router-dom';
 
 function Banner(props) {
   const {t} = useTranslation();
@@ -7,26 +8,38 @@ function Banner(props) {
   return (
     <div className="Banner fadeInDown" style={{animationDelay: '0.4s'}}>
       <div className="wrapper">
-        {/* <div className="content">
-          <Link to="/FAQ">
-            {t('Please read note on ')}
-            <em>Deceased Count Reconciliation </em>
-            {t('and state-wise updates ')}
-          </Link>
-          .
+        {/* <div className="alert-icon">
+          <AlertIcon size={16} />
         </div> */}
-
         <div className="content">
-          &#9888; &nbsp;
-          {t('Important Update on the future of incovid19.org post 31st October 2022. ')}
+          {t(
+            '⚠ As of 1st November 2022, only National and State level data as published by MoHFW will be updated on this site.'
+          )}
+        </div>
+        <div className="content">
           <a
-            href="/notice"
+            href="https://www.incovid19.org/notice"
             rel="noreferrer"
-            target="_self"
+            target="_blank"
           >
-            Read more →
+            {t('Read more →  ')}
           </a>
         </div>
+        &nbsp; &nbsp;
+        <div>Please</div>&nbsp;
+        <a href="mailto:contact@incovid19.org" rel="noreferrer" target="_blank">
+          contact us
+        </a>
+        &nbsp;
+        <div>for specific data requests</div>
+        {/* <a
+          href="https://github.com/incovid19/data/issues"
+          rel="noreferrer"
+          target="_blank"
+        >
+          &nbsp;Github
+        </a> */}
+        {/* ,&nbsp; */}
         {/* &nbsp;{t(' or ')}&nbsp;
         {'  '} */}
         {/* <a
